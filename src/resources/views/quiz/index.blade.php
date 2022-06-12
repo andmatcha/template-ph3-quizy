@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>タイトルを入力</title>
+    <title>{{$title}}</title>
     <style>
         body {
             margin: 0;
@@ -130,29 +130,40 @@
 
 <body>
     <div class="content-wrapper">
-        <h1>東京の難読地名クイズ</h1>
+        <h1>{{$title}}</h1>
         <div class="quiz-container">
-
             <!-- 設問に関するループ -->
-
+            @php
+            foreach ($questions as $i => $question) :
+            @endphp
             <!-- クイズボックス -->
             <div class="quiz-box">
-                <h1 class="quiz-title">1.この地名はなんて読む？</h1>
-                <img src="画像パスを入力">
-                <ul id="choicesクエスチョンIDを入力" class="choices-list">
+                <h1 class="quiz-title">{{$i + 1}}.この地名はなんて読む？</h1>
+                <img src="/images/{{$question->img}}">
+                <ul id="choices{{$question->id}}" class="choices-list">
 
                     <!-- 選択肢に関するループ -->
-                    <li id="choiceクエスチョンID_選択肢ID" class="choice-item" style="order: 順番を入力;" onclick="clickfunction('クエスチョンID','選択肢ID', '正誤')">
-                        選択肢を入力
+                    @php
+                    $order = range(0, count($choices[$i]) - 1); //シャッフル用: 0始まりで、長さが選択肢の数である小さい順の整数の配列
+                    shuffle($order); //設問ごとにシャッフルする
+                    foreach ($choices[$i] as $choice_i => $choice) :
+                    @endphp
+                    <li id="choice{{$question->id}}_{{$choice->id}}" class="choice-item" style="order: {{$order[$choice_i]}};" onclick="clickfunction({{$question->id}},{{$choice->id}},{{$choice->valid}})">
+                        {{$choice->name}}
                     </li>
-
+                    @php
+                    endforeach;
+                    @endphp
                 </ul>
             </div>
             <!-- コメントボックス -->
-            <div id="comment_boxクエスチョンID" class="comment-box hide">
-                <h3 id="comment_titleクエスチョンID" class="comment-title"></h3>
-                <p id="comment_textクエスチョンID" class="comment-text">クエスチョンコメント</p>
+            <div id="comment_box{{$question->id}}" class="comment-box hide">
+                <h3 id="comment_title{{$question->id}}" class="comment-title"></h3>
+                <p id="comment_text{{$question->id}}" class="comment-text">クエスチョンコメント</p>
             </div>
+            @php
+            endforeach;
+            @endphp
 
         </div>
     </div>
