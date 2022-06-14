@@ -11,4 +11,5 @@
 |
 */
 
-Route::get('/quiz/{id?}', 'QuizController@index');
+Route::get('/quiz', 'QuizController@index');
+Route::get('/quiz/{id}', 'QuizController@quiz');
