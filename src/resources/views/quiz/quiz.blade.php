@@ -25,7 +25,6 @@
                         <!-- 選択肢に関するループ -->
                         @foreach ($choices[$loop->index] as $choice)
                             <li id="choice{{ $question->id }}_{{ $loop->iteration }}" class="choice-item"
-                                style="order: {{ $loop->iteration }};"
                                 onclick="clickfunction({{ $question->id }},{{ $loop->iteration }},{{ $choice->valid }})">
                                 {{ $choice->name }}
                             </li>

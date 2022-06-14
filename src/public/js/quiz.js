@@ -1,3 +1,33 @@
+// 選択肢シャッフル
+const choicesLists = document.querySelectorAll('.choices-list').forEach(list => {
+    const shuffle = randomIntArray(1, list.childElementCount);
+    for (let i = 0; i < list.childElementCount; i++) {
+        list.children[i].style.order = shuffle[i];
+    }
+});
+
+function randomIntArray(start, end) {
+    // 整数の配列
+    let arr = [];
+    if (start > end) {
+        return [];
+    }
+    for (let i = start; i < end; i++) {
+        arr.push(i);
+    }
+
+    // arrをシャッフル
+    let num = arr.length;
+    while (num) {
+        let i = Math.floor(Math.random() * num);
+        let value = arr[--num];
+        arr[num] = arr[i];
+        arr[i] = value;
+    }
+
+    return arr;
+}
+
 function clickfunction(questionId, clickedChoiceId, valid) {
     //選択肢の色を変える
     const clickedChoice = document.getElementById(`choice${questionId}_${clickedChoiceId}`);
