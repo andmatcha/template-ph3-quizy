@@ -11,5 +11,10 @@
 |
 */
 
+// quizy
 Route::get('/quiz', 'QuizController@index');
 Route::get('/quiz/{id}', 'QuizController@quiz');
+
+// 青本
+Route::get('hello', 'HelloController@index');
+Route::get('hello/other', 'HelloController@other');
