@@ -53,4 +53,20 @@ class HelloController extends Controller
             . $end;
         return $html;
     }
+
+    public function chapter3(Request $request)
+    {
+        $data = [
+            'msg' => 'bladeテンプレート',
+            'id' => $request->id,
+            'data' => ['one', 'two', 'three']
+        ];
+        return view('hello.index', $data);
+    }
+
+    public function post (Request $request) {
+        $username = $request->username;
+        $data = ['username' => 'Hello, ' . $username . ' !'];
+        return view('hello.index', $data);
+    }
 }

@@ -18,3 +18,5 @@ Route::get('/quiz/{id}', 'QuizController@quiz');
 // 青本
 Route::get('hello', 'HelloController@index');
 Route::get('hello/other', 'HelloController@other');
+Route::get('hello/chapter3', 'HelloController@chapter3');
+Route::post('hello/chapter3', 'HelloController@post');
