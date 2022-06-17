@@ -64,9 +64,22 @@ class HelloController extends Controller
         return view('hello.index', $data);
     }
 
-    public function post (Request $request) {
+    public function post(Request $request)
+    {
         $username = $request->username;
         $data = ['username' => 'Hello, ' . $username . ' !'];
         return view('hello.index', $data);
+    }
+
+    public function chapter3_1()
+    {
+        $data = [
+            'items' => [
+                ['name' => 'taro', 'mail' => 'xxx@mail.com'],
+                ['name' => 'jiro', 'mail' => 'xxx@mail.com'],
+                ['name' => 'saburo', 'mail' => 'xxx@mail.com']
+            ]
+        ];
+        return view('hello.hello', $data);
     }
 }

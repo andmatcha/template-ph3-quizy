@@ -20,3 +20,4 @@ Route::get('hello', 'HelloController@index');
 Route::get('hello/other', 'HelloController@other');
 Route::get('hello/chapter3', 'HelloController@chapter3');
 Route::post('hello/chapter3', 'HelloController@post');
+Route::get('hello/chapter3-1', 'HelloController@chapter3_1');
