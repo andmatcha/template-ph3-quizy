@@ -80,6 +80,11 @@ class HelloController extends Controller
                 ['name' => 'saburo', 'mail' => 'xxx@mail.com']
             ]
         ];
-        return view('hello.hello', $data);
+        return view('hello.chapter3', $data);
+    }
+
+    public function chapter4 (Request $request)
+    {
+        return view('hello.chapter4');
     }
 }
