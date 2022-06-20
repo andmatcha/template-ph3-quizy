@@ -1,69 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.helloapp')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-</head>
+@section('title', 'Index')
 
-<body>
-    <h1>Sample Page</h1>
-    @isset($username)
-        <p>{{ $username }}</p>
-    @else
-        <p>Write something.</p>
-    @endisset
-    <section>
-        <h2>Data</h2>
-        <p>This is sample page with php template.</p>
-        <p>Message: {{ $msg ?? '' }}</p>
-        <p>ID: {{ $id ?? '' }}</p>
-        <p>Date: {{ date('Y年n月j日') }}</p>
-        @isset($data)
-            <ul>
-                @foreach ($data as $item)
-                    <li>No. {{ $loop->iteration }}: {{ $item }}</li>
-                @endforeach
-            </ul>
-        @endisset
-    </section>
-    <section>
-        <h2>Form</h2>
-        <p>Input your name.</p>
-        <form action="/hello/chapter3" method="POST">
+@section('menubar')
+    @parent
+    インデックスページ
+@endsection
+
+@section('content')
+    <p>{{ $msg }}</p>
+    @if (count($errors) > 0)
+        <p>入力に問題があります。再入力してください。</p>
+    @endif
+    <form action="/hello" method="POST">
+        <table>
             @csrf
-            <input type="text" name="username">
-            <input type="submit">
-        </form>
-    </section>
-    <section>
-        <ol>
-            @for ($i = 1; $i < 100; $i++)
-                @if ($i % 2 == 1)
-                    @continue
-                @elseif ($i <= 10)
-                    <li>No. {{ $i }}</li>
-                @else
-                @break
-            @endif
-        @endfor
-    </ol>
-</section>
-<section>
-    <ol>
-        @php
-            $counter = 0;
-        @endphp
-        @while ($counter < count($data ?? []))
-            <li>{{ $data[$counter] }}</li>
-            @php
-                $counter++;
-            @endphp
-        @endwhile
-    </ol>
-</section>
-</body>
+            @error('name')
+                <tr>
+                    <th>ERROR</th>
+                    <td>{{ $message }}</td>
+                </tr>
+            @enderror
+            <tr>
+                <th>name: </th>
+                <td><input type="text" name="name" value="{{ old('name') }}"></td>
+            </tr>
+            @error('mail')
+                <tr>
+                    <th>ERROR</th>
+                    <td>{{ $message }}</td>
+                </tr>
+            @enderror
+            <tr>
+                <th>mail: </th>
+                <td><input type="text" name="mail" value="{{ old('mail') }}"></td>
+            </tr>
+            @error('age')
+                <tr>
+                    <th>ERROR</th>
+                    <td>{{ $message }}</td>
+                </tr>
+            @enderror
+            <tr>
+                <th>age: </th>
+                <td><input type="text" name="age" value="{{ old('age') }}"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="send"></td>
+            </tr>
+        </table>
+    </form>
+@endsection
 
-</html>
+@section('footer')
+    フッターだよおおお
+@endsection
