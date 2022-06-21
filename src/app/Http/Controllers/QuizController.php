@@ -24,4 +24,9 @@ class QuizController extends Controller
         ];
         return view('quiz.quiz', $data);
     }
+
+    public function admin()
+    {
+        return view('quiz.admin');
+    }
 }

@@ -16,7 +16,12 @@ use App\Http\Middleware\HelloMiddleware;
 // quizy
 Route::get('/quiz', 'QuizController@index');
 Route::get('/quiz/{big_question_id}', 'QuizController@quiz');
+Route::get('/quiz/admin', 'QuizController@admin');
 
 // 青本
 Route::get('hello', 'HelloController@index');
 Route::post('hello', 'HelloController@post');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
