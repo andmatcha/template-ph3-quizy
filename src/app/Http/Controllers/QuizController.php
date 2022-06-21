@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\BigQuestion;
+use App\Question;
+use App\Choice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,19 +16,11 @@ class QuizController extends Controller
         return view('quiz.index', ['big_questions' => $big_questions]);
     }
 
-    public function quiz($id)
+    public function quiz($big_question_id)
     {
-        $big_question = DB::table('big_questions')->where('id', $id)->first();
-        $questions = DB::table('questions')->where('big_question_id', $id)->get();
-        $choices = [];
-        foreach ($questions as $question) {
-            array_push($choices, DB::table('choices')->where('question_id', $question->id)->get());
-        }
+        $big_question = BigQuestion::find($big_question_id)->load('questions.choices');
         $data = [
-            'id' => $id,
-            'title' => $big_question->title,
-            'questions' => $questions,
-            'choices' => $choices
+            'bq' => $big_question
         ];
         return view('quiz.quiz', $data);
     }

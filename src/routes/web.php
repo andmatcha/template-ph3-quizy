@@ -15,7 +15,7 @@ use App\Http\Middleware\HelloMiddleware;
 
 // quizy
 Route::get('/quiz', 'QuizController@index');
-Route::get('/quiz/{id}', 'QuizController@quiz');
+Route::get('/quiz/{big_question_id}', 'QuizController@quiz');
 
 // 青本
 Route::get('hello', 'HelloController@index');
