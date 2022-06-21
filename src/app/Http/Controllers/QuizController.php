@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\BigQuestion;
-use App\Question;
-use App\Choice;
-use Illuminate\Http\Request;
+use App\Models\BigQuestion;
 use Illuminate\Support\Facades\DB;
 
 class QuizController extends Controller
