@@ -2,9 +2,34 @@ body {
   font-family: "Zen Kaku Gothic New", sans-serif;
 }
 
+.header {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #eeeeee;
+}
+.header__title {
+  font-size: 1.6rem;
+}
+.header__menu {
+  display: flex;
+  gap: 1rem;
+}
+.header__menu a {
+  font-weight: 600;
+  transition: 0.3s;
+}
+.header__menu a:hover {
+  color: #0071bc;
+}
+
 .wrapper {
   margin: 0 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
@@ -103,6 +128,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px #cccccc;
 }
 
 .add_btn {
@@ -113,4 +140,9 @@ body {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: 0.3s;
+}
+.add_btn:hover {
+  background-color: #0071bc;
+  color: #ffffff;
 }

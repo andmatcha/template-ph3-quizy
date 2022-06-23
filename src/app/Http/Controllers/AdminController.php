@@ -20,11 +20,15 @@ class AdminController extends Controller
 
     public function edit($big_question_id)
     {
-        $big_question = BigQuestion::find($big_question_id)->load('questions.choices');
-        $data = [
-            'bq' => $big_question
-        ];
-        return view('admin.edit', $data);
+        if(Auth::check()) {
+            $big_question = BigQuestion::find($big_question_id)->load('questions.choices');
+            $data = [
+                'bq' => $big_question
+            ];
+            return view('admin.edit', $data);
+        } else {
+            return redirect()->action('AdminController@getLogin');
+        }
     }
 
     public function getLogin()

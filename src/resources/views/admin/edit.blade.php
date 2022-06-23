@@ -15,6 +15,13 @@
 </head>
 
 <body>
+    <header class="header">
+        <h1 class="header__title">問題編集</h1>
+        <div class="header__menu">
+            <a href="/admin/">トップ</a>
+            <a href="/admin/logout">ログアウト</a>
+        </div>
+    </header>
     <div class="wrapper">
         <form action="/admin/db" method="POST">
             <div class="big_question">
