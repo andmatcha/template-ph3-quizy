@@ -18,6 +18,8 @@ class CreateChoicesTable extends Migration
             $table->string('name');
             $table->integer('valid');
             $table->unsignedBigInteger('question_id');
+            $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('question_id')
                 ->references('id')

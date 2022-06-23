@@ -17,6 +17,9 @@ class CreateQuestionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('img');
             $table->unsignedBigInteger('big_question_id');
+            $table->integer('question_order')->default(1);
+            $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('big_question_id')
                 ->references('id')

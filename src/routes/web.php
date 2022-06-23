@@ -13,10 +13,16 @@
 
 use App\Http\Middleware\HelloMiddleware;
 
-// quizy
+// quizy - クイズ画面
 Route::get('/quiz', 'QuizController@index');
 Route::get('/quiz/{big_question_id}', 'QuizController@quiz');
-Route::get('/quiz/admin', 'QuizController@admin');
+
+// quizy - 管理画面
+Route::get('/admin', 'AdminController@index');
+Route::get('/admin/login', 'AdminController@getLogin');
+Route::post('/admin/login', 'AdminController@postLogin');
+Route::get('/admin/logout', 'AdminController@getLogout');
+Route::get('/admin/edit/{big_question_id}', 'AdminController@edit');
 
 // 青本
 Route::get('hello', 'HelloController@index');

@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\BigQuestion;
-use Illuminate\Support\Facades\DB;
 
 class QuizController extends Controller
 {
     public function index()
     {
-        $big_questions = DB::table('big_questions')->get();
+        $big_questions = BigQuestion::all();
         return view('quiz.index', ['big_questions' => $big_questions]);
     }
 
@@ -20,10 +19,5 @@ class QuizController extends Controller
             'bq' => $big_question
         ];
         return view('quiz.quiz', $data);
-    }
-
-    public function admin()
-    {
-        return view('quiz.admin');
     }
 }
