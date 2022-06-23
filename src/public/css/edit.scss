@@ -1,0 +1,117 @@
+body {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+}
+
+.wrapper {
+    margin: 0 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.big_question {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    &__headding {
+        display: flex;
+        font-size: 1.4rem;
+        margin: 4px 0;
+    }
+    &__input {
+        width: 50%;
+        max-width: 600px;
+        min-width: 200px;
+        border: 2px solid #cccccc;
+        padding: 4px;
+        border-radius: 4px;
+    }
+}
+
+.questions {
+    width: 100%;
+    &__inner {
+        &__question {
+            width: 100%;
+            margin: 20px 0;
+            &__headding {
+                font-size: 1.2rem;
+                margin-bottom: 4px;
+            }
+            &__content {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                &__image {
+                    width: calc(50% - 10px);
+                    min-width: 400px;
+                    &__input {
+                        width: 100%;
+                    }
+                    &__preview {
+                        width: 100%;
+                        margin: 4px 0;
+                        border: 2px solid #cccccc;
+                        & img {
+                            width: 100%;
+                            object-fit: contain;
+                        }
+                    }
+                }
+                &__choices {
+                    margin-top: 28px;
+                    width: calc(50% - 10px);
+                    min-width: 400px;
+                    &__list {
+                        &__choice {
+                            width: 100%;
+                            min-width: 300px;
+                            &__input {
+                                width: 100%;
+                                border: 2px solid #cccccc;
+                                padding: 2px;
+                                border-radius: 4px;
+                                margin: 4px 0;
+                                display: flex;
+                            }
+                        }
+                    }
+                    &__add {
+                        width: fit-content;
+                        padding: 4px;
+                        height: 40px;
+                    }
+                }
+            }
+        }
+    }
+    &__btn {
+        width: 200px;
+        padding: 8px;
+        text-align: center;
+    }
+}
+
+.send {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    &__btn {
+        width: 320px;
+        height: 40px;
+        background-color: #0071bc;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.add_btn {
+    border: 2px solid #0071bc;
+    border-radius: 4px;
+    color: #0071bc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
