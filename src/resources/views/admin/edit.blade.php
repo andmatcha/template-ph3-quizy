@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>管理画面 | 編集</title>
     <link rel="stylesheet" href="{{ asset('css/destyle.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/edit.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin_edit.css') }}">
     {{-- google fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,18 +15,14 @@
 </head>
 
 <body>
-    <header class="header">
-        <h1 class="header__title">問題編集</h1>
-        <div class="header__menu">
-            <a href="/admin/">トップ</a>
-            <a href="/admin/logout">ログアウト</a>
-        </div>
-    </header>
+    @component('components.admin_header', ['page_title' => '編集'])
+    @endcomponent
     <div class="wrapper">
-        <form action="/admin/db" method="POST">
+        <form action="/admin/update" method="POST">
+            @csrf
             <div class="big_question">
                 <h2 class="big_question__headding">問題タイトル</h2>
-                <input type="text" value="{{ $bq->title }}" class="big_question__input">
+                <input name="title" type="text" value="{{ $bq->title }}" class="big_question__input">
             </div>
             <div class="questions">
                 <div class="questions__inner" id="questionsList">
@@ -35,7 +31,8 @@
                             <h3 class="questions__inner__question__headding">{{ $loop->iteration }}問目</h3>
                             <div class="questions__inner__question__content">
                                 <div class="questions__inner__question__content__image">
-                                    <input type="file" id="questionImage{{ $loop->iteration }}"
+                                    <input name="question{{ $question->id }}[image]" type="file"
+                                        accept="image/png, image/jpeg" id="questionImage{{ $loop->iteration }}"
                                         onchange="previewFile(this, {{ $loop->iteration }})"
                                         class="questions__inner__question__content__image__input">
                                     <div class="questions__inner__question__content__image__preview">
@@ -48,7 +45,8 @@
                                         id="choicesList{{ $loop->iteration }}">
                                         @foreach ($question->choices as $choice)
                                             <li class="questions__inner__question__content__choices__list__choice">
-                                                <input type="text" value="{{ $choice->name }}"
+                                                <input name="question{{ $question->id }}[choices][]" type="text"
+                                                    value="{{ $choice->name }}"
                                                     class="questions__inner__question__content__choices__list__choice__input">
                                             </li>
                                         @endforeach

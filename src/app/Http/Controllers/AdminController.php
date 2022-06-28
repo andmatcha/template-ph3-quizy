@@ -31,6 +31,14 @@ class AdminController extends Controller
         }
     }
 
+    public function postUpdate(Request $request)
+    {
+        $data = [
+            'question1' => $request->question1
+        ];
+        return view('admin.test', $data);
+    }
+
     public function getLogin()
     {
         $data = [

@@ -13,7 +13,7 @@ function previewFile(file, iteration) {
 function addChoice(iteration) {
     const newChoice =
         `<li class="questions__inner__question__content__choices__list__choice">
-            <input type="text" class="questions__inner__question__content__choices__list__choice__input">
+            <input name="question{{ $question->id }}[choices][]" type="text" class="questions__inner__question__content__choices__list__choice__input">
         </li>`;
 
     const choicesList = document.getElementById(`choicesList${iteration}`);
@@ -32,7 +32,7 @@ function addQuestion() {
             <h3 class="questions__inner__question__headding">${newQuestionNum}問目</h3>
             <div class="questions__inner__question__content">
                 <div class="questions__inner__question__content__image">
-                    <input type="file" id="questionImage${newQuestionNum}" onchange="previewFile(this, ${11})"
+                    <input name="question{{ $question->id }}[image]" type="file" id="questionImage${newQuestionNum}" onchange="previewFile(this, ${11})"
                         class="questions__inner__question__content__image__input">
                     <div class="questions__inner__question__content__image__preview">
                         <img src="" id="imagePreview${newQuestionNum}">
@@ -41,7 +41,7 @@ function addQuestion() {
                 <div class="questions__inner__question__content__choices">
                     <ul class="questions__inner__question__content__choices__list" id="choicesList${11}">
                         <li class="questions__inner__question__content__choices__list__choice">
-                            <input type="text" value=""
+                            <input name="question{{ $question->id }}[choices][]" type="text" value=""
                                 class="questions__inner__question__content__choices__list__choice__input">
                         </li>
                     </ul>

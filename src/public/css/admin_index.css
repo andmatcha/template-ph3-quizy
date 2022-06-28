@@ -1,0 +1,42 @@
+body {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+}
+
+.wrapper {
+  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bq__list {
+  font-size: 1.3rem;
+  margin-top: 20px;
+}
+.bq__list__item {
+  margin: 12px 0;
+  display: flex;
+  align-items: center;
+}
+.bq__list__item__disp {
+  margin-right: 8px;
+}
+.bq__list__item__disp a {
+  text-decoration: underline;
+  transition: 0.3s;
+}
+.bq__list__item__disp a:hover {
+  color: #0071bc;
+}
+.bq__list__item__edit {
+  width: 32px;
+  color: #cccccc;
+  cursor: pointer;
+  margin: 0 4px;
+}
+.bq__list__item__delete {
+  width: 32px;
+  color: #cccccc;
+  cursor: pointer;
+  margin: 0 4px;
+}
