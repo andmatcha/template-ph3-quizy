@@ -19,11 +19,13 @@ Route::get('/quiz/{big_question_id}', 'QuizController@quiz');
 
 // quizy - 管理画面
 Route::get('/admin', 'AdminController@index');
-Route::get('/admin/login', 'AdminController@getLogin');
-Route::post('/admin/login', 'AdminController@postLogin');
-Route::get('/admin/logout', 'AdminController@getLogout');
+Route::post('/admin', 'AdminController@postIndex');
+Route::get('/admin/login', 'LoginController@getLogin');
+Route::post('/admin/login', 'LoginController@postLogin');
+Route::get('/admin/logout', 'LoginController@getLogout');
 Route::get('/admin/edit/{big_question_id}', 'AdminController@edit');
-Route::post('/admin/update', 'AdminController@postUpdate');
+Route::post('/admin/update', 'BigQuestionController@postUpdate');
+Route::post('/admin/delete', 'BigQuestionController@postDelete');
 
 // 青本
 Route::get('hello', 'HelloController@index');

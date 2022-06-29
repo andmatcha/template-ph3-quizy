@@ -1,58 +1,51 @@
 document.querySelectorAll('.js_drag').forEach(item => {
-    item.addEventListener('dragstart', () => {
-
+    item.addEventListener('dragstart', e => {
+        if (e.target.classList.contains('js_drag')) {
+            e.dataTransfer.setData('text/plain', e.target.id);
+        }
     });
 
-    item.addEventListener('dragover', () => {
+    item.addEventListener('dragover', e => {
+        e.preventDefault();
+        let rect = e.target.getBoundingClientRect();
 
+        if (e.target.classList.contains('js_drag')) {
+            if ((e.clientY - rect.top) < (e.target.clientHeight / 2)) {
+                //マウスカーソルの位置が要素の半分より上
+                e.target.style.borderTop = '2px solid blue';
+                e.target.style.borderBottom = '';
+            } else {
+                //マウスカーソルの位置が要素の半分より下
+                e.target.style.borderTop = '';
+                e.target.style.borderBottom = '2px solid blue';
+            }
+        }
     });
 
-    item.addEventListener('dragleave', () => {
-
+    item.addEventListener('dragleave', e => {
+        if (e.target.classList.contains('js_drag')) {
+            e.target.style.borderTop = '';
+            e.target.style.borderBottom = '';
+        }
     });
 
-    item.addEventListener('drop', () => {
+    item.addEventListener('drop', e => {
+        e.preventDefault();
+        let id = e.dataTransfer.getData('text/plain');
+        let elm_drag = document.getElementById(id);
 
+        let rect = e.target.getBoundingClientRect();
+
+        if (e.target.classList.contains('js_drag')) {
+            if ((e.clientY - rect.top) < (e.target.clientHeight / 2)) {
+                //マウスカーソルの位置が要素の半分より上
+                e.target.parentNode.insertBefore(elm_drag, e.target);
+            } else {
+                //マウスカーソルの位置が要素の半分より下
+                e.target.parentNode.insertBefore(elm_drag, e.target.nextSibling);
+            }
+        }
+        e.target.style.borderTop = '';
+        e.target.style.borderBottom = '';
     });
 });
-
-
-
-// document.querySelectorAll('.js_drag').forEach(elm => {
-//     elm.ondragstart = function () {
-//         event.dataTransfer.setData('text/plain', event.target.id);
-//     };
-//     elm.ondragover = function () {
-//         event.preventDefault();
-//         let rect = this.getBoundingClientRect();
-//         if ((event.clientY - rect.top) < (this.clientHeight / 2)) {
-//             //マウスカーソルの位置が要素の半分より上
-//             this.style.borderTop = '2px solid blue';
-//             this.style.borderBottom = '';
-//         } else {
-//             //マウスカーソルの位置が要素の半分より下
-//             this.style.borderTop = '';
-//             this.style.borderBottom = '2px solid blue';
-//         }
-//     };
-//     elm.ondragleave = function () {
-//         this.style.borderTop = '';
-//         this.style.borderBottom = '';
-//     };
-//     elm.ondrop = function () {
-//         event.preventDefault();
-//         let id = event.dataTransfer.getData('text/plain');
-//         let elm_drag = document.getElementById(id);
-
-//         let rect = this.getBoundingClientRect();
-//         if ((event.clientY - rect.top) < (this.clientHeight / 2)) {
-//             //マウスカーソルの位置が要素の半分より上
-//             this.parentNode.insertBefore(elm_drag, this);
-//         } else {
-//             //マウスカーソルの位置が要素の半分より下
-//             this.parentNode.insertBefore(elm_drag, this.nextSibling);
-//         }
-//         this.style.borderTop = '';
-//         this.style.borderBottom = '';
-//     };
-// });

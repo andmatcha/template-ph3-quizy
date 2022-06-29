@@ -9,6 +9,31 @@ body {
     justify-content: center;
 }
 
+.btns {
+    display: flex;
+    margin: 20px 0;
+    &__btn {
+        display: flex;
+        width: 60px;
+        height: 40px;
+        border: 2px solid #cccccc;
+        color: #ffffff;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        line-height: 150%;
+    }
+
+    &__edit {
+        background-color: #0071bc;
+    }
+    &__done {
+        background-color: #ed1c24;
+    }
+}
+
 .bq {
     &__list {
         font-size: 1.3rem;
@@ -17,22 +42,41 @@ body {
             margin: 12px 0;
             display: flex;
             align-items: center;
+            height: 36px;
+            &__drag_icon {
+                width: 28px;
+                cursor: all-scroll;
+                color: #cccccc;
+                margin: 4px;
+            }
             &__disp {
                 margin-right: 8px;
                 & a {
                     text-decoration: underline;
-                    transition: 0.3s;
+                    transition: color 0.3s;
                     &:hover {
                         color: #0071bc;
                     }
                 }
             }
-            &__edit {
-                width: 32px;
-                color: #cccccc;
-                cursor: pointer;
-                margin: 0 4px;
+            &__input {
+                margin-right: 8px;
+                border: 2px solid #cccccc;
+                border-radius: 4px;
+                padding: 4px;
             }
+            // &__edit {
+            //     width: 32px;
+            //     color: #cccccc;
+            //     cursor: pointer;
+            //     margin: 0 4px;
+            // }
+            // &__check {
+            //     width: 32px;
+            //     color: #cccccc;
+            //     cursor: pointer;
+            //     margin: 0 4px;
+            // }
             &__delete {
                 width: 32px;
                 color: #cccccc;
@@ -41,4 +85,8 @@ body {
             }
         }
     }
+}
+
+.hide {
+    display: none;
 }
