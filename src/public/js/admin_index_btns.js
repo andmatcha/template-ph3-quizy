@@ -76,3 +76,10 @@ function deleteBtn(bqId) {
         deleteForm.submit();
     }
 }
+
+function createBtn() {
+    if (confirm('作成しますか？')) {
+        const createForm = document.getElementById('create_form');
+        createForm.submit();
+    }
+}

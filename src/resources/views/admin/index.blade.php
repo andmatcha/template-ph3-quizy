@@ -33,7 +33,8 @@
                 @foreach ($big_questions as $big_question)
                     <li class="bq__list__item js_drag" id="title{{ $big_question->id }}">
                         {{-- 問題タイトルの順序 --}}
-                        <input type="hidden" class="js_bq_order" name="bq[{{ $big_question->id }}][order]" value="{{ $loop->iteration }}">
+                        <input type="hidden" class="js_bq_order" name="bq[{{ $big_question->id }}][order]"
+                            value="{{ $loop->iteration }}">
                         {{-- ドラッグ用アイコン --}}
                         <div class="bq__list__item__drag_icon js_drag_icon hide">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -48,10 +49,12 @@
                             <a href="/admin/edit/{{ $big_question->id }}">{{ $big_question->title }}</a>
                         </div>
                         {{-- 問題タイトル編集用input --}}
-                        <input type="text" name="bq[{{ $big_question->id }}][title]" value="{{ $big_question->title }}" class="bq__list__item__input js_title_input hide"
+                        <input type="text" name="bq[{{ $big_question->id }}][title]"
+                            value="{{ $big_question->title }}" class="bq__list__item__input js_title_input hide"
                             id="input{{ $big_question->id }}">
                         {{-- 削除ボタン --}}
-                        <div class="bq__list__item__delete js_delete_btn hide" onclick="deleteBtn({{ $big_question->id }})">
+                        <div class="bq__list__item__delete js_delete_btn hide"
+                            onclick="deleteBtn({{ $big_question->id }})">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -67,6 +70,15 @@
         <form action="/admin/delete" method="POST" id="delete_form">
             @csrf
             <input type="hidden" id="delete_input" name="delete" value="">
+        </form>
+
+        <form action="/admin/create" method="POST" id="create_form">
+            @csrf
+            <h3 class="create_form__title">新規作成</h3>
+            <div class="create_form__content">
+                <input type="text" name="title" placeholder="問題タイトルを入力してください" class="create_form__content__input">
+                <div class="create_form__content__btn" id="create_btn" onclick="createBtn()">作成</div>
+            </div>
         </form>
     </div>
 

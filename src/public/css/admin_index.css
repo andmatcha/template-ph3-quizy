@@ -72,6 +72,34 @@ body {
   margin: 0 4px;
 }
 
+.create_form__title {
+  font-size: 1.4rem;
+  margin: 20px 0;
+}
+.create_form__content {
+  display: flex;
+  gap: 20px;
+  height: 40px;
+}
+.create_form__content__input {
+  width: 320px;
+  border: 2px solid #cccccc;
+  border-radius: 4px;
+  padding: 4px;
+}
+.create_form__content__btn {
+  font-size: 1.2rem;
+  width: 80px;
+  height: 100%;
+  text-align: center;
+  line-height: 2rem;
+  border: 2px solid #cccccc;
+  background-color: #0071bc;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .hide {
   display: none;
 }

@@ -26,6 +26,7 @@ Route::get('/admin/logout', 'LoginController@getLogout');
 Route::get('/admin/edit/{big_question_id}', 'AdminController@edit');
 Route::post('/admin/update', 'BigQuestionController@postUpdate');
 Route::post('/admin/delete', 'BigQuestionController@postDelete');
+Route::post('/admin/create', 'BigQuestionController@postCreate');
 
 // 青本
 Route::get('hello', 'HelloController@index');

@@ -26,4 +26,13 @@ class BigQuestionController extends Controller
         $big_question->delete();
         return redirect()->action('AdminController@index');
     }
+
+    public function postCreate(Request $request)
+    {
+        $title = $request->title;
+        $order = BigQuestion::max('big_question_order') + 1;
+        BigQuestion::create(['title' => $title, 'big_question_order' => $order]);
+
+        return redirect()->action('AdminController@index');
+    }
 }
