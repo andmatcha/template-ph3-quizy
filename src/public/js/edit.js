@@ -17,11 +17,23 @@ function addChoice(iteration, questionId) {
         return;
     }
     // 新しいli要素を作る
-    const newChoice = document.getElementById('new_choice').cloneNode(true);
+    const newChoice = document.querySelector('.js_choice').cloneNode(true);
     newChoice.removeAttribute('id');
-    newChoice.classList.remove('hide');
+    newChoice.querySelector('input').value = '';
+    newChoice.name = `new_choice[${questionId}]`;
     // 新しい入力欄を追加
     choicesList.insertAdjacentElement('beforeend', newChoice);
+}
+
+// 選択肢を削除
+function deleteChoice(btn) {
+    btn.parentNode.remove();
+}
+
+// 問題番号のoptionタグ
+function createOptionHTML(num) {
+    option = `<option value="${num}">${num}</option>`;
+    return option;
 }
 
 // 設問を追加
@@ -42,17 +54,19 @@ function addQuestion() {
     newQuestion = tmpEl.firstChild;
     questionsList.insertAdjacentElement('beforeend', newQuestion);
 
-    // xx問目のセレクトボックスにoptionを追加
-    const newOption = document.createElement('option');
-    newOption.value = newQuestionNum;
-    newOption.innerText = newQuestionNum;
-    const orderSelect = document.getElementById('order_select');
-    orderSelect.insertAdjacentElement('beforeend', newOption);
+    // 全てのセレクトボックスに新しいoptionタグを追加
+    const newOption = createOptionHTML(newQuestionNum);
+    document.querySelectorAll('#questionsList .js_order_select').forEach(el => {
+        el.insertAdjacentHTML('beforeend', newOption);
+    });
+
+    // 新たに追加した設問のセレクトボックスの該当するoptionタグにselected属性を付与
+    document.querySelectorAll('#questionsList .js_order_select')[newQuestionNum - 1].querySelector(`option[value="${newQuestionNum}"]`).setAttribute('selected', true);
 }
 
 // 問題番号の重複をチェック
 function checkSelectUnique() {
-    const selectEls = document.querySelectorAll('.js_order_select');
+    const selectEls = document.querySelectorAll('#questionsList .js_order_select');
     const values = [];
     selectEls.forEach(el => {
         values.push(el.value);
@@ -74,16 +88,28 @@ function sendForm() {
     }
 }
 
+// 問題番号のoptionを選択した時にselected属性を切り替える
+document.querySelectorAll('#questionsList .js_order_select').forEach(el => {
+    el.addEventListener('change', () => {
+        el.querySelector('option[selected]').removeAttribute('selected');
+
+        const value = el.value;
+        el.querySelector(`option[value="${value}"]`).setAttribute('selected', true);
+    });
+})
+
 window.addEventListener('DOMContentLoaded', () => {
-    // xx問目のセレクトボックスに問題数分のoptionを入れる
+    // 問題番号のセレクトボックスに問題数分のoptionを入れる
     document.querySelectorAll('#questionsList>*').forEach((v, i) => {
         const iteration = i + 1;
-        let optionEl = `<option value="${iteration}">${iteration}</option>`;
-        document.querySelectorAll('.js_order_select').forEach((selectEl, questionIndex) => {
-            if (iteration == questionIndex + 1) {
-                optionEl = `<option value="${iteration}" selected>${iteration}</option>`;
-            }
+        document.querySelectorAll('#questionsList .js_order_select').forEach((selectEl, questionIndex) => {
+            optionEl = createOptionHTML(iteration);
             selectEl.insertAdjacentHTML('beforeend', optionEl);
         });
+    });
+
+    // 問題番号のoptionタグにselected属性をつける
+    document.querySelectorAll('#questionsList .js_order_select').forEach((el, index) => {
+        el.children[index].setAttribute('selected', true);
     });
 });

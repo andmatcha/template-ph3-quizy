@@ -77,8 +77,10 @@ body {
   min-width: 400px;
 }
 .questions__inner__question__content__choices__list__choice {
-  width: 100%;
+  width: calc(100% - 40px);
   min-width: 300px;
+  display: flex;
+  gap: 8px;
 }
 .questions__inner__question__content__choices__list__choice__input {
   width: 100%;
@@ -87,6 +89,12 @@ body {
   border-radius: 4px;
   margin: 4px 0;
   display: flex;
+}
+.questions__inner__question__content__choices__list__choice__delete {
+  width: 32px;
+  height: 32px;
+  color: #adadad;
+  cursor: pointer;
 }
 .questions__inner__question__content__choices__add {
   width: -webkit-fit-content;
