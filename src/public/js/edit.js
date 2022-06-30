@@ -43,12 +43,6 @@ function deleteChoice(btn, choiceId) {
     btn.parentNode.remove();
 }
 
-// // 問題番号のoptionタグ
-// function createOptionHTML(num) {
-//     option = `<option value="${num}">${num}</option>`;
-//     return option;
-// }
-
 // 設問を追加
 function addQuestion() {
     const questionsList = document.getElementById('questionsList');
@@ -66,39 +60,10 @@ function addQuestion() {
     tmpEl.innerHTML = newQuestionStr;
     newQuestion = tmpEl.firstChild;
     questionsList.insertAdjacentElement('beforeend', newQuestion);
-
-    // // 全てのセレクトボックスに新しいoptionタグを追加
-    // const newOption = createOptionHTML(newQuestionNum);
-    // document.querySelectorAll('.js_order_select').forEach(el => {
-    //     el.insertAdjacentHTML('beforeend', newOption);
-    // });
-
-    // // 新たに追加した設問のセレクトボックスの該当するoptionタグにselected属性を付与
-    // document.querySelectorAll('#questionsList .js_order_select')[newQuestionNum - 1].querySelector(`option[value="${newQuestionNum}"]`).setAttribute('selected', true);
 }
-
-// // 問題番号の重複をチェック
-// function checkSelectUnique() {
-//     const selectEls = document.querySelectorAll('#questionsList .js_order_select');
-//     const values = [];
-//     selectEls.forEach(el => {
-//         values.push(el.value);
-//     });
-//     const setValues = new Set(values);
-//     if (setValues.size == values.length) {
-//         return true;
-//     } else {
-//         return false;
-//     }
-// }
 
 // フォーム送信
 function sendForm() {
-    // if (!checkSelectUnique()) {
-    //     alert('問題番号が重複しています。');
-    //     return;
-    // }
-
     const form = document.getElementById('edit_form');
     deletedChoices.forEach(choiceId => {
         const deleteInput = document.createElement('input');
@@ -116,36 +81,9 @@ function deleteQuestion(question_id, is_new) {
     if (is_new) {
         document.getElementById(`new_question${question_id}`).remove();
     } else {
-        // document.getElementById(`question${question_id}`).remove();
         if (confirm('本当に削除しますか？')) {
             document.getElementById('delete_input').value = question_id;
             document.getElementById('delete_form').submit();
         }
     }
 }
-
-// // 問題番号のoptionを選択した時にselected属性を切り替える
-// document.querySelectorAll('#questionsList .js_order_select').forEach(el => {
-//     el.addEventListener('change', () => {
-//         el.querySelector('option[selected]').removeAttribute('selected');
-
-//         const value = el.value;
-//         el.querySelector(`option[value="${value}"]`).setAttribute('selected', true);
-//     });
-// })
-
-window.addEventListener('DOMContentLoaded', () => {
-    // // 問題番号のセレクトボックスに問題数分のoptionを入れる
-    // document.querySelectorAll('#questionsList>*').forEach((v, i) => {
-    //     const iteration = i + 1;
-    //     document.querySelectorAll('.js_order_select').forEach((selectEl, questionIndex) => {
-    //         optionEl = createOptionHTML(iteration);
-    //         selectEl.insertAdjacentHTML('beforeend', optionEl);
-    //     });
-    // });
-
-    // // 問題番号のoptionタグにselected属性をつける
-    // document.querySelectorAll('#questionsList .js_order_select').forEach((el, index) => {
-    //     el.children[index].setAttribute('selected', true);
-    // });
-});
