@@ -18,12 +18,14 @@
     @component('components.admin_header', ['page_title' => '編集'])
     @endcomponent
     <div class="wrapper">
+        <div class="big_question">
+            <h2 class="big_question__headding">{{ $bq->title }}</h2>
+            <div class="big_question__btn" onclick="sortBtn()" id="sort_btn">並び替え</div>
+            <div class="big_question__btn big_question__btn--done hide" onclick="sendSortForm()" id="sort_done_btn">完了</div>
+        </div>
         <form action="/admin/q/update" method="POST" enctype="multipart/form-data" id="edit_form">
             @csrf
-            <div class="big_question">
-                <h2 class="big_question__headding">{{ $bq->title }}</h2>
-                <input type="hidden" name="bq_id" value="{{ $bq->id }}">
-            </div>
+            <input type="hidden" name="bq_id" value="{{ $bq->id }}">
 
             <div class="questions">
                 <div class="questions__inner" id="questionsList">
@@ -106,6 +108,22 @@
             <input type="hidden" name="bq_id" value="{{ $bq->id }}">
             <input type="hidden" name="question_id" id="delete_input">
         </form>
+
+        {{-- 並び替え画面 --}}
+        <form action="/admin/q/update_order" method="POST" class="hide" id="sort_form">
+            @csrf
+            <input type="hidden" name="bq_id" value="{{ $bq->id }}">
+            <div class="sort" id="sort_list">
+                @foreach ($bq->questions as $question)
+                    <div class="sort__question js_drag" draggable="true" id="sort_item{{ $loop->iteration }}">
+                        <div class="sort__question__img">
+                            <img src="/images/{{ $question->img }}">
+                        </div>
+                        <input type="hidden" name="order[{{ $question->id }}]" value="{{ $loop->iteration }}" class="js_order_input">
+                    </div>
+                @endforeach
+            </div>
+        </form>
     </div>
 
     {{-- 設問追加用 --}}
@@ -138,6 +156,7 @@
     </div>
 
     <script src="{{ asset('js/edit.js') }}"></script>
+    <script src="{{ asset('js/drag_drop.js') }}"></script>
 </body>
 
 </html>

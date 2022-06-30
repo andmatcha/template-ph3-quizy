@@ -11,20 +11,28 @@ body {
 
 .big_question {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 20px;
     margin: 20px 0;
     &__headding {
         display: flex;
         font-size: 1.4rem;
         margin: 4px 0;
     }
-    &__input {
-        width: 50%;
-        max-width: 600px;
-        min-width: 200px;
-        border: 2px solid #cccccc;
-        padding: 4px;
+    &__btn {
+        width: 100px;
+        height: 32px;
+        background-color: #0071bc;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border-radius: 4px;
+        box-shadow: 0 2px 4px #cccccc;
+        cursor: pointer;
+        &--done {
+            background-color: #ed1c24;
+        }
     }
 }
 
@@ -140,6 +148,26 @@ body {
     &:hover {
         background-color: #0071bc;
         color: #ffffff;
+    }
+}
+
+.sort {
+    display: flex;
+    flex-direction: column;
+    margin: 40px;
+    &__question {
+        height: 200px;
+        border: 1px solid #adadad;
+        &__img {
+            margin: 20px;
+            height: calc(100% - 40px);
+            width: fit-content;
+            border: 2px solid #cccccc;
+            & img {
+                height: 100%;
+                object-fit: contain;
+            }
+        }
     }
 }
 

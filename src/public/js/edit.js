@@ -87,3 +87,85 @@ function deleteQuestion(question_id, is_new) {
         }
     }
 }
+
+// 並び替えボタン
+function sortBtn() {
+    const sortBtnEl = document.getElementById('sort_btn');
+    const editForm = document.getElementById('edit_form');
+    const sortForm = document.getElementById('sort_form');
+    editForm.classList.toggle('hide');
+    sortForm.classList.toggle('hide');
+    if (editForm.classList.contains('hide')) {
+        sortBtnEl.innerText = '戻る';
+    } else {
+        sortBtnEl.innerText = '並び替え';
+    }
+}
+
+function sendSortForm() {
+    const sortForm = document.getElementById('sort_form');
+    if (confirm('変更を確定しますか？')) {
+        document.querySelectorAll('.js_order_input').forEach((el, index) => {
+            el.value = index + 1;
+        });
+        sortForm.submit();
+    }
+}
+
+// 設問が増えた場合並び替えボタンを消す
+function switchSortBtnAvailability(questionCount) {
+    const target = document.getElementById('questionsList');
+    const config = {
+        childList: true
+    };
+
+    const questionsListObserver = new MutationObserver(() => {
+        const sortBtnEl = document.getElementById('sort_btn');
+        if (document.getElementById('questionsList').childElementCount != questionCount) {
+            sortBtnEl.classList.add('hide');
+        } else {
+            sortBtnEl.classList.remove('hide');
+        }
+    });
+
+    questionsListObserver.observe(target, config);
+}
+
+// 並び替えボタン、並び替えがあったら完了ボタンにする
+function switchSortDone(prevSortListItemIds) {
+    const target = document.getElementById('sort_list');
+    const config = {
+        childList: true
+    };
+
+    const sortListObserver = new MutationObserver(() => {
+        const sortBtnEl = document.getElementById('sort_btn');
+        const doneBtnEl = document.getElementById('sort_done_btn');
+
+        // 並び替え画面で設問が入れ替わったら戻るボタン(並び替えボタン)を消して完了ボタンを出す
+        const sortListItemIds = [];
+        document.querySelectorAll('#sort_list>*').forEach(el => {
+            sortListItemIds.push(el.id);
+        });
+        if (JSON.stringify(sortListItemIds) !== JSON.stringify(prevSortListItemIds)) {
+            sortBtnEl.classList.add('hide');
+            doneBtnEl.classList.remove('hide');
+        } else {
+            sortBtnEl.classList.remove('hide');
+            doneBtnEl.classList.add('hide');
+        }
+    });
+
+    sortListObserver.observe(target, config);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    switchSortBtnAvailability(document.getElementById('questionsList').childElementCount);
+
+    // 並び替え画面の設問の順序比較用
+    const prevSortListItemIds = [];
+    document.querySelectorAll('#sort_list>*').forEach(el => {
+        prevSortListItemIds.push(el.id);
+    });
+    switchSortDone(prevSortListItemIds);
+});

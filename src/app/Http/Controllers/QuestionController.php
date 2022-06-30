@@ -110,4 +110,15 @@ class QuestionController extends Controller
         }
         return redirect('/admin/edit/' . $request->bq_id);
     }
+
+    public function postUpdateOrder(Request $request)
+    {
+        if (isset($request->order)) {
+            foreach ($request->order as $question_id => $order) {
+                Question::find($question_id)->fill(['question_order' => $order])->save();
+            }
+        }
+
+        return redirect('/admin/edit/' . $request->bq_id);
+    }
 }

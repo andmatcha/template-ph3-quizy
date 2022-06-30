@@ -29,6 +29,7 @@ Route::post('/admin/bq/delete', 'BigQuestionController@postDelete');
 Route::post('/admin/bq/create', 'BigQuestionController@postCreate');
 Route::post('/admin/q/update', 'QuestionController@postUpdate');
 Route::post('/admin/q/delete', 'QuestionController@postDelete');
+Route::post('/admin/q/update_order', 'QuestionController@postUpdateOrder');
 
 // 青本
 Route::get('hello', 'HelloController@index');
