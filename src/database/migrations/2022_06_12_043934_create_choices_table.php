@@ -15,10 +15,16 @@ class CreateChoicesTable extends Migration
     {
         Schema::create('choices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('question_id');
             $table->string('name');
             $table->integer('valid');
+            $table->unsignedBigInteger('question_id');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('question_id')
+                ->references('id')
+                ->on('questions')
+                ->onDelete('cascade');
         });
     }
 

@@ -1,0 +1,124 @@
+body {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+}
+
+.wrapper {
+  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.big_question {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+.big_question__headding {
+  display: flex;
+  font-size: 1.4rem;
+  margin: 4px 0;
+}
+.big_question__input {
+  width: 50%;
+  max-width: 600px;
+  min-width: 200px;
+  border: 2px solid #cccccc;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.questions {
+  width: 100%;
+}
+.questions__inner__question {
+  width: 100%;
+  margin: 20px 0;
+}
+.questions__inner__question__headding {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+.questions__inner__question__content {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.questions__inner__question__content__image {
+  width: calc(50% - 10px);
+  min-width: 400px;
+}
+.questions__inner__question__content__image__input {
+  width: 100%;
+}
+.questions__inner__question__content__image__preview {
+  width: 100%;
+  margin: 4px 0;
+  border: 2px solid #cccccc;
+}
+.questions__inner__question__content__image__preview img {
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.questions__inner__question__content__choices {
+  margin-top: 28px;
+  width: calc(50% - 10px);
+  min-width: 400px;
+}
+.questions__inner__question__content__choices__list__choice {
+  width: 100%;
+  min-width: 300px;
+}
+.questions__inner__question__content__choices__list__choice__input {
+  width: 100%;
+  border: 2px solid #cccccc;
+  padding: 2px;
+  border-radius: 4px;
+  margin: 4px 0;
+  display: flex;
+}
+.questions__inner__question__content__choices__add {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 4px;
+  height: 40px;
+}
+.questions__btn {
+  width: 200px;
+  padding: 8px;
+  text-align: center;
+}
+
+.send {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+.send__btn {
+  width: 320px;
+  height: 40px;
+  background-color: #0071bc;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px #cccccc;
+}
+
+.add_btn {
+  border: 2px solid #0071bc;
+  border-radius: 4px;
+  color: #0071bc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.add_btn:hover {
+  background-color: #0071bc;
+  color: #ffffff;
+}

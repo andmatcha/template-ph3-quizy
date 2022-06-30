@@ -17,6 +17,7 @@ class CreateBigQuestionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
