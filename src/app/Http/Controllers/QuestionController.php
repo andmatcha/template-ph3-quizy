@@ -102,4 +102,12 @@ class QuestionController extends Controller
         }
         return redirect('/admin/edit/' . $request->bq_id);
     }
+
+    public function postDelete(Request $request)
+    {
+        if (isset($request->question_id)) {
+            Question::find($request->question_id)->delete();
+        }
+        return redirect('/admin/edit/' . $request->bq_id);
+    }
 }

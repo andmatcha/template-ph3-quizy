@@ -40,12 +40,11 @@ body {
                 display: flex;
                 align-items: center;
                 gap: 8px;
-                &__select {
-                    border: 2px solid #cccccc;
-                    border-radius: 4px;
-                    width: 2rem;
-                    padding: 4px;
-                    text-align: center;
+                &__delete {
+                    width: 24px;
+                    height: 24px;
+                    color: #adadad;
+                    cursor: pointer;
                 }
             }
             &__content {

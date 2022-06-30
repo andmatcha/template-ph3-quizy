@@ -58,7 +58,7 @@ function addQuestion() {
     const newQuestionNum = questionsList.childElementCount + 1;
     // 設問追加用のテンプレートをコピーして#iteration#をnewQuestionNumに置換してquestionListに挿入
     let newQuestion = document.getElementById('new_question').cloneNode(true);
-    newQuestion.removeAttribute('id');
+    newQuestion.id = `new_question${newQuestionNum}`;
     newQuestion.classList.remove('hide');
     let newQuestionStr = newQuestion.outerHTML;
     newQuestionStr = newQuestionStr.replace(/\#iteration\#/g, newQuestionNum);
@@ -109,6 +109,19 @@ function sendForm() {
     });
 
     form.submit();
+}
+
+// 設問削除
+function deleteQuestion(question_id, is_new) {
+    if (is_new) {
+        document.getElementById(`new_question${question_id}`).remove();
+    } else {
+        // document.getElementById(`question${question_id}`).remove();
+        if (confirm('本当に削除しますか？')) {
+            document.getElementById('delete_input').value = question_id;
+            document.getElementById('delete_form').submit();
+        }
+    }
 }
 
 // // 問題番号のoptionを選択した時にselected属性を切り替える

@@ -28,8 +28,19 @@
             <div class="questions">
                 <div class="questions__inner" id="questionsList">
                     @foreach ($bq->questions as $question)
-                        <div class="questions__inner__question">
-                            <h3 class="questions__inner__question__headding">{{ $loop->iteration }}問目</h3>
+                        <div class="questions__inner__question" id="question{{ $question->id }}">
+                            <h3 class="questions__inner__question__headding">
+                                {{ $loop->iteration }}問目
+                                <div onclick="deleteQuestion({{ $question->id }}, false)"
+                                    class="questions__inner__question__headding__delete">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                            </h3>
                             <div class="questions__inner__question__content">
                                 <div class="questions__inner__question__content__image">
                                     <input name="image{{ $question->id }}" type="file"
@@ -90,15 +101,30 @@
                 <div class="send__btn" onclick="sendForm()">更新する</div>
             </div>
         </form>
+        <form action="/admin/q/delete" method="POST" id="delete_form">
+            @csrf
+            <input type="hidden" name="bq_id" value="{{ $bq->id }}">
+            <input type="hidden" name="question_id" id="delete_input">
+        </form>
     </div>
 
     {{-- 設問追加用 --}}
     <div class="questions__inner__question hide" id="new_question">
-        <h3 class="questions__inner__question__headding">#iteration#問目</h3>
+        <h3 class="questions__inner__question__headding">
+            #iteration#問目
+            <div onclick="deleteQuestion(#iteration#, true)" class="questions__inner__question__headding__delete">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+        </h3>
         <div class="questions__inner__question__content">
             <div class="questions__inner__question__content__image">
                 <input name="image_new_question#iteration#" type="file" id="questionImage#iteration#"
-                    onchange="previewFile(this, #iteration#)" class="questions__inner__question__content__image__input">
+                    onchange="previewFile(this, #iteration#)"
+                    class="questions__inner__question__content__image__input">
                 <div class="questions__inner__question__content__image__preview">
                     <img src="" id="imagePreview#iteration#">
                 </div>
