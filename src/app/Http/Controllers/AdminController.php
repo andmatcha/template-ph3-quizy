@@ -23,7 +23,7 @@ class AdminController extends Controller
     public function edit($big_question_id)
     {
         if (Auth::check()) {
-            $big_question = BigQuestion::find($big_question_id)->load(['questions.choices' => function ($query) {
+            $big_question = BigQuestion::find($big_question_id)->load(['questions' => function ($query) {
                 $query->orderby('question_order', 'asc');
             }]);
             $data = [
