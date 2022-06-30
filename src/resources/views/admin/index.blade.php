@@ -21,7 +21,7 @@
     @component('components.admin_header', ['page_title' => '問題一覧'])
     @endcomponent
     <div class="wrapper">
-        <form action="/admin/update" method="POST" id="bq_form">
+        <form action="/admin/bq/update" method="POST" id="bq_form">
             @csrf
             {{-- 編集・完了ボタン --}}
             <div class="btns">
@@ -67,12 +67,12 @@
             </ul>
         </form>
 
-        <form action="/admin/delete" method="POST" id="delete_form">
+        <form action="/admin/bq/delete" method="POST" id="delete_form">
             @csrf
             <input type="hidden" id="delete_input" name="delete" value="">
         </form>
 
-        <form action="/admin/create" method="POST" id="create_form">
+        <form action="/admin/bq/create" method="POST" id="create_form">
             @csrf
             <h3 class="create_form__title">新規作成</h3>
             <div class="create_form__content">

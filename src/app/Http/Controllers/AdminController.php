@@ -29,7 +29,7 @@ class AdminController extends Controller
             ];
             return view('admin.edit', $data);
         } else {
-            return redirect()->action('AdminController@getLogin');
+            return redirect()->action('LoginController@getLogin');
         }
     }
 }

@@ -38,6 +38,16 @@ body {
 .questions__inner__question__headding {
   font-size: 1.2rem;
   margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.questions__inner__question__headding__select {
+  border: 2px solid #cccccc;
+  border-radius: 4px;
+  width: 2rem;
+  padding: 4px;
+  text-align: center;
 }
 .questions__inner__question__content {
   display: flex;
@@ -106,6 +116,7 @@ body {
   align-items: center;
   border-radius: 4px;
   box-shadow: 0 2px 4px #cccccc;
+  cursor: pointer;
 }
 
 .add_btn {
@@ -121,4 +132,8 @@ body {
 .add_btn:hover {
   background-color: #0071bc;
   color: #ffffff;
+}
+
+.hide {
+  display: none;
 }
