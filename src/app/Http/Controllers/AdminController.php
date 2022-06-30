@@ -16,7 +16,7 @@ class AdminController extends Controller
             $big_questions = BigQuestion::orderby('big_question_order', 'asc')->get();
             return view('admin.index', ['big_questions' => $big_questions]);
         } else {
-            return redirect()->action('LoginController@getLogin');
+            return redirect('/admin/login');
         }
     }
 
@@ -31,7 +31,7 @@ class AdminController extends Controller
             ];
             return view('admin.edit', $data);
         } else {
-            return redirect()->action('LoginController@getLogin');
+            return redirect('/admin/login');
         }
     }
 }
