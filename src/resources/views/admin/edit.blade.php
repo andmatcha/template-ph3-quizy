@@ -29,13 +29,7 @@
                 <div class="questions__inner" id="questionsList">
                     @foreach ($bq->questions as $question)
                         <div class="questions__inner__question">
-                            <input type="hidden" name="question_id[]" value="{{ $question->id }}">
-                            <h3 class="questions__inner__question__headding">
-                                <select name="question_order[{{ $question->id }}]"
-                                    class="questions__inner__question__headding__select js_order_select" id="select{{ $loop->iteration }}">
-                                </select>
-                                問目
-                            </h3>
+                            <h3 class="questions__inner__question__headding">{{ $loop->iteration }}問目</h3>
                             <div class="questions__inner__question__content">
                                 <div class="questions__inner__question__content__image">
                                     <input name="image{{ $question->id }}" type="file"
@@ -57,9 +51,20 @@
                                                 <input name="choices[{{ $choice->id }}]" type="text"
                                                     value="{{ $choice->name }}"
                                                     class="questions__inner__question__content__choices__list__choice__input">
+
+                                                {{-- 正解ラジオボタン --}}
+                                                @if ($choice->valid == 1)
+                                                    <input type="radio"
+                                                        name="questions[{{ $question->id }}][valid_choice]"
+                                                        value="{{ $choice->id }}" checked>
+                                                @else
+                                                    <input type="radio"
+                                                        name="questions[{{ $question->id }}][valid_choice]"
+                                                        value="{{ $choice->id }}">
+                                                @endif
                                                 {{-- 削除ボタン --}}
-                                                <div class="questions__inner__question__content__choices__list__choice__delete"
-                                                    onclick="deleteChoice(this)">
+                                                <div class="questions__inner__question__content__choices__list__choice__delete js_delete_btn"
+                                                    onclick="deleteChoice(this, {{ $choice->id }})">
                                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd"
@@ -89,15 +94,10 @@
 
     {{-- 設問追加用 --}}
     <div class="questions__inner__question hide" id="new_question">
-        <h3 class="questions__inner__question__headding">
-            <select name="question_order[{{ $question->id }}]"
-                class="questions__inner__question__headding__select js_order_select">
-            </select>
-            問目
-        </h3>
+        <h3 class="questions__inner__question__headding">#iteration#問目</h3>
         <div class="questions__inner__question__content">
             <div class="questions__inner__question__content__image">
-                <input name="new_question[#iteration#][image]" type="file" id="questionImage#iteration#"
+                <input name="image_new_question#iteration#" type="file" id="questionImage#iteration#"
                     onchange="previewFile(this, #iteration#)" class="questions__inner__question__content__image__input">
                 <div class="questions__inner__question__content__image__preview">
                     <img src="" id="imagePreview#iteration#">
@@ -105,8 +105,8 @@
             </div>
             <div class="questions__inner__question__content__choices">
                 <ul class="questions__inner__question__content__choices__list" id="choicesList#iteration#"></ul>
-                <div class="questions__inner__question__content__choices__add add_btn" onclick="addChoice(#iteration#)"
-                    id="addChoiceBtn">+ 選択肢を追加</div>
+                <div class="questions__inner__question__content__choices__add add_btn"
+                    onclick="addChoice(#iteration#, 'new')" id="addChoiceBtn">+ 選択肢を追加</div>
             </div>
         </div>
     </div>

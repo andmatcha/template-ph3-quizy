@@ -81,6 +81,7 @@ body {
   min-width: 300px;
   display: flex;
   gap: 8px;
+  align-items: center;
 }
 .questions__inner__question__content__choices__list__choice__input {
   width: 100%;
