@@ -25,6 +25,9 @@ RUN apt-get update && \
   composer config -g process-timeout 3600 && \
   composer config -g repos.packagist composer https://packagist.org
 
+RUN curl -SL https://deb.nodesource.com/setup_14.x | bash
+RUN apt-get install -y nodejs
+
 COPY ./usr/local/etc/php/php.ini /usr/local/etc/php/php.ini
 
 WORKDIR /work/backend
