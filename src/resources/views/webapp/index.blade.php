@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POSSE Webapp</title>
-    <link rel="stylesheet" href="./css/destyle.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/destyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 </head>
 
 <body>
@@ -29,7 +29,7 @@
                     <div class="modal__container__contents__area__box">
                         <p class="modal__container__contents__area__box__title">学習コンテンツ(複数選択可)</p>
                         <div class="modal__container__contents__area__box__checkboxes">
-                            <?php foreach ($contents as $content) : ?>
+                            {{-- @foreach ($contents as $content) --}}
                             <label>
                                 <div class="modal__container__contents__area__box__checkboxes__icon">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -38,15 +38,15 @@
                                             d="M5 13l4 4L19 7"></path>
                                     </svg>
                                 </div>
-                                <input type="checkbox"><?= $content['name'] ?>
+                                <input type="checkbox">{{-- $content['name'] --}}
                             </label>
-                            <?php endforeach; ?>
+                            {{-- @endforeach --}}
                         </div>
                     </div>
                     <div class="modal__container__contents__area__box">
                         <p class="modal__container__contents__area__box__title">学習言語(複数選択可)</p>
                         <div class="modal__container__contents__area__box__checkboxes">
-                            <?php foreach ($langs as $lang) : ?>
+                            {{-- @foreach ($langs as $lang) --}}
                             <label>
                                 <div class="modal__container__contents__area__box__checkboxes__icon">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -55,9 +55,9 @@
                                             d="M5 13l4 4L19 7"></path>
                                     </svg>
                                 </div>
-                                <input type="checkbox"><?= $lang['name'] ?>
+                                <input type="checkbox">{{-- $lang['name'] --}}
                             </label>
-                            <?php endforeach; ?>
+                            {{-- @endforeach --}}
                         </div>
                     </div>
                 </div>
@@ -83,13 +83,13 @@
                     </div>
                 </div>
             </div>
-            <input type="submit" class="modal__container__btn" value="記録・投稿"></input>
+            <input type="submit" class="modal__container__btn" value="記録・投稿">
         </form>
     </div>
 
     <header class="header">
         <div class="header__logo">
-            <img src="./img/posse_logo.jpeg">
+            <img src="images/posse_logo.jpeg">
         </div>
         <p class="header__week">
             4th week
@@ -104,17 +104,17 @@
             <div class="main__container__area_hours">
                 <div class="main__container__area_hours__box main__container__area_tile">
                     <p class="main__container__area_hours__box__title">Today</p>
-                    <p class="main__container__area_hours__box__num"><?= $today_sum ?></p>
+                    <p class="main__container__area_hours__box__num">{{-- $today_sum --}}</p>
                     <p class="main__container__area_hours__box__unit">hours</p>
                 </div>
                 <div class="main__container__area_hours__box main__container__area_tile">
                     <p class="main__container__area_hours__box__title">Month</p>
-                    <p class="main__container__area_hours__box__num"><?= $this_month_sum ?></p>
+                    <p class="main__container__area_hours__box__num">{{-- $this_month_sum --}}</p>
                     <p class="main__container__area_hours__box__unit">hours</p>
                 </div>
                 <div class="main__container__area_hours__box main__container__area_tile">
                     <p class="main__container__area_hours__box__title">Total</p>
-                    <p class="main__container__area_hours__box__num"><?= $total ?></p>
+                    <p class="main__container__area_hours__box__num">{{-- $total --}}</p>
                     <p class="main__container__area_hours__box__unit">hours</p>
                 </div>
             </div>
@@ -127,12 +127,12 @@
                     <div id="langsChart"></div>
                 </div>
                 <ul>
-                    <?php foreach ($langs as $lang) : ?>
+                    {{-- @foreach ($langs as $lang) --}}
                     <li>
                         <div class="main__container__area_donut_chart__list_circle"></div>
-                        <?= $lang['name'] ?>
+                        {{-- $lang['name'] --}}
                     </li>
-                    <?php endforeach; ?>
+                    {{-- @endforeach --}}
                 </ul>
             </div>
             <div class="main__container__area_donut_chart main__container__area_tile">
@@ -141,12 +141,12 @@
                     <div id="contentsChart"></div>
                 </div>
                 <ul>
-                    <?php foreach ($contents as $content) : ?>
+                    {{-- @foreach ($contents as $content) --}}
                     <li>
                         <div class="main__container__area_donut_chart__list_circle"></div>
-                        <?= $content['name'] ?>
+                        {{-- $content['name'] --}}
                     </li>
-                    <?php endforeach; ?>
+                    {{-- @endforeach --}}
                 </ul>
             </div>
         </div>
@@ -172,7 +172,7 @@
     </footer>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="./js/script.js"></script>
+    <script src="{{ asset('js/index.js') }}"></script>
 </body>
 
 </html>
