@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/webapp', function () {
+    return view('webapp.index');
+});
