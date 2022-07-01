@@ -16,7 +16,11 @@ Route::get('/', function () {
 });
 
 Route::get('/webapp', 'WebappController@index');
+Route::get('/logout', 'Auth\LoginController@logout');
+// Route::get('/login', 'Auth\LoginController@login')->name('login');
+// Route::post('/login', 'Auth\LoginController@login');
+// Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
