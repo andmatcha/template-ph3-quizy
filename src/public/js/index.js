@@ -3,13 +3,11 @@ const modal = document.getElementById('modal');
 
 function closeModal() {
     modal.style.display = 'none';
-    console.log('aaa');
 }
 document.getElementById('closeBtn').addEventListener('click', closeModal);
 
 function openModal() {
     modal.style.display = 'block';
-    console.log('aaa');
 }
 document.getElementById('openBtn').addEventListener('click', openModal);
 
@@ -40,9 +38,8 @@ function drawBarChart() {
 }
 
 function drawLangsChart() {
-    console.log(hoursLang);
     // Create the data table.
-    var data = google.visualization.arrayToDataTable(hoursLang);
+    var data = google.visualization.arrayToDataTable(langHour);
     // Set chart options
     var options = {
         'legend': 'none',
@@ -60,7 +57,7 @@ function drawLangsChart() {
 
 function drawContentsChart() {
     // Create the data table.
-    var data = google.visualization.arrayToDataTable(hoursContent);
+    var data = google.visualization.arrayToDataTable(contentHour);
     // Set chart options
     var options = {
         'legend': 'none',

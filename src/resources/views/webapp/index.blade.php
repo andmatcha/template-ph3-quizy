@@ -29,35 +29,35 @@
                     <div class="modal__container__contents__area__box">
                         <p class="modal__container__contents__area__box__title">学習コンテンツ(複数選択可)</p>
                         <div class="modal__container__contents__area__box__checkboxes">
-                            {{-- @foreach ($contents as $content) --}}
-                            <label>
-                                <div class="modal__container__contents__area__box__checkboxes__icon">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <input type="checkbox">{{-- $content['name'] --}}
-                            </label>
-                            {{-- @endforeach --}}
+                            @foreach ($contents as $content)
+                                <label>
+                                    <div class="modal__container__contents__area__box__checkboxes__icon">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </div>
+                                    <input type="checkbox">{{ $content->name }}
+                                </label>
+                            @endforeach
                         </div>
                     </div>
                     <div class="modal__container__contents__area__box">
                         <p class="modal__container__contents__area__box__title">学習言語(複数選択可)</p>
                         <div class="modal__container__contents__area__box__checkboxes">
-                            {{-- @foreach ($langs as $lang) --}}
-                            <label>
-                                <div class="modal__container__contents__area__box__checkboxes__icon">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                                <input type="checkbox">{{-- $lang['name'] --}}
-                            </label>
-                            {{-- @endforeach --}}
+                            @foreach ($langs as $lang)
+                                <label>
+                                    <div class="modal__container__contents__area__box__checkboxes__icon">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </div>
+                                    <input type="checkbox">{{ $lang->name }}
+                                </label>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -104,17 +104,17 @@
             <div class="main__container__area_hours">
                 <div class="main__container__area_hours__box main__container__area_tile">
                     <p class="main__container__area_hours__box__title">Today</p>
-                    <p class="main__container__area_hours__box__num">{{-- $today_sum --}}</p>
+                    <p class="main__container__area_hours__box__num">{{ $daily_sum[date('j')] }}</p>
                     <p class="main__container__area_hours__box__unit">hours</p>
                 </div>
                 <div class="main__container__area_hours__box main__container__area_tile">
                     <p class="main__container__area_hours__box__title">Month</p>
-                    <p class="main__container__area_hours__box__num">{{-- $this_month_sum --}}</p>
+                    <p class="main__container__area_hours__box__num">{{ $monthly_sum[date('n')] }}</p>
                     <p class="main__container__area_hours__box__unit">hours</p>
                 </div>
                 <div class="main__container__area_hours__box main__container__area_tile">
                     <p class="main__container__area_hours__box__title">Total</p>
-                    <p class="main__container__area_hours__box__num">{{-- $total --}}</p>
+                    <p class="main__container__area_hours__box__num">{{ $total }}</p>
                     <p class="main__container__area_hours__box__unit">hours</p>
                 </div>
             </div>
@@ -127,12 +127,12 @@
                     <div id="langsChart"></div>
                 </div>
                 <ul>
-                    {{-- @foreach ($langs as $lang) --}}
-                    <li>
-                        <div class="main__container__area_donut_chart__list_circle"></div>
-                        {{-- $lang['name'] --}}
-                    </li>
-                    {{-- @endforeach --}}
+                    @foreach ($langs as $lang)
+                        <li>
+                            <div class="main__container__area_donut_chart__list_circle"></div>
+                            {{ $lang->name }}
+                        </li>
+                    @endforeach
                 </ul>
             </div>
             <div class="main__container__area_donut_chart main__container__area_tile">
@@ -141,12 +141,12 @@
                     <div id="contentsChart"></div>
                 </div>
                 <ul>
-                    {{-- @foreach ($contents as $content) --}}
-                    <li>
-                        <div class="main__container__area_donut_chart__list_circle"></div>
-                        {{-- $content['name'] --}}
-                    </li>
-                    {{-- @endforeach --}}
+                    @foreach ($contents as $content)
+                        <li>
+                            <div class="main__container__area_donut_chart__list_circle"></div>
+                            {{ $content->name }}
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
@@ -171,7 +171,46 @@
         </div>
     </footer>
 
+
+    {{-- jsにグラフ用データを渡す --}}
+    <script>
+        //日毎の合計
+        const dailySum = [
+            ['date', 'hours']
+        ];
+
+        //言語ごとの合計
+        const langHour = [
+            ['lang', 'hours']
+        ];
+
+        //コンテンツごとの合計
+        const contentHour = [
+            ['content', 'hours']
+        ];
+    </script>
+
+    @foreach ($daily_sum as $day => $hour)
+        <script>
+            dailySum.push([{{ $day }}, {{ $hour }}]);
+        </script>
+    @endforeach
+
+    @foreach ($lang_hour as $lang_id => $hour)
+        <script>
+            langHour.push(['{{ $lang_id }}', {{ $hour }}]);
+        </script>
+    @endforeach
+
+    @foreach ($content_hour as $content_id => $hour)
+        <script>
+            contentHour.push(['{{ $content_id }}', {{ $hour }}]);
+        </script>
+    @endforeach
+
+    {{-- google charts読み込み --}}
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    {{-- 自分のjs読み込み --}}
     <script src="{{ asset('js/index.js') }}"></script>
 </body>
 
