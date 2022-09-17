@@ -93,6 +93,7 @@
         </div>
         <p class="header__week">
             4th week
+            <a href="/logout">ログアウト</a>
         </p>
         <button class="header__btn" id="openBtn">
             記録・投稿
