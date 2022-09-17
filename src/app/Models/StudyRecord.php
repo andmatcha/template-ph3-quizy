@@ -23,6 +23,11 @@ class StudyRecord extends Model
         return $this->hasMany('App\Models\StudiedContent');
     }
 
+    /**
+     * 言語別の学習時間を取得
+     *
+     * @return array
+     */
     public static function sumByLang()
     {
         $lang_records = self::with('studied_langs')->get();
@@ -42,6 +47,11 @@ class StudyRecord extends Model
         return $lang_record_arr;
     }
 
+    /**
+     * コンテンツ別の学習時間を取得
+     *
+     * @return array
+     */
     public static function sumByContent()
     {
         $content_records = self::with('studied_contents')->get();
@@ -61,6 +71,11 @@ class StudyRecord extends Model
         return $content_record_arr;
     }
 
+    /**
+     * 月毎の学習時間の合計を取得
+     *
+     * @return Illuminate\Support\Collection
+     */
     public static function getDailySum()
     {
         return self::whereYear('date', date('Y'))
@@ -74,6 +89,11 @@ class StudyRecord extends Model
             });
     }
 
+    /**
+     * 月毎の学習時間の合計を取得
+     *
+     * @return Illuminate\Support\Collection
+     */
     public static function getMonthlySum()
     {
         return self::whereYear('date', date('Y'))
