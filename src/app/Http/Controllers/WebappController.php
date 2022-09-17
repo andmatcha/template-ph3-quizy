@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\WebappHelper;
 use App\Models\Lang;
 use App\Models\Content;
 use App\Models\StudyRecord;
