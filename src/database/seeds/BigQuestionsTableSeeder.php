@@ -14,8 +14,8 @@ class BigQuestionsTableSeeder extends Seeder
     public function run()
     {
         DB::table('big_questions')->insert([
-            ['title' => '東京の難読地名クイズ'],
-            ['title' => '広島の難読地名クイズ']
+            ['title' => '東京の難読地名クイズ', 'big_question_order' => 1],
+            ['title' => '広島の難読地名クイズ', 'big_question_order' => 2]
         ]);
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -28,6 +30,9 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    protected $maxAttempts = 4;     // ログイン試行回数（回）
+    protected $decayMinutes = 3;   // ログインロックタイム（分）
+
     /**
      * Create a new controller instance.
      *
@@ -36,5 +41,27 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function showLoginForm()
+    {
+        $data = [
+            'msg' => 'ログインしてください'
+        ];
+        return view('admin.login', $data);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/admin/login');
+    }
+
+    protected function sendLockoutResponse(Request $request)
+    {
+        $data = [
+            'msg' => 'ロックされました'
+        ];
+        return view('admin.login', $data);
     }
 }

@@ -9,6 +9,30 @@ body {
   justify-content: center;
 }
 
+.btns {
+  display: flex;
+  margin: 20px 0;
+}
+.btns__btn {
+  display: flex;
+  width: 60px;
+  height: 40px;
+  border: 2px solid #cccccc;
+  color: #ffffff;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  line-height: 150%;
+}
+.btns__edit {
+  background-color: #0071bc;
+}
+.btns__done {
+  background-color: #ed1c24;
+}
+
 .bq__list {
   font-size: 1.3rem;
   margin-top: 20px;
@@ -17,26 +41,65 @@ body {
   margin: 12px 0;
   display: flex;
   align-items: center;
+  height: 36px;
+}
+.bq__list__item__drag_icon {
+  width: 28px;
+  cursor: all-scroll;
+  color: #cccccc;
+  margin: 4px;
 }
 .bq__list__item__disp {
   margin-right: 8px;
 }
 .bq__list__item__disp a {
   text-decoration: underline;
-  transition: 0.3s;
+  transition: color 0.3s;
 }
 .bq__list__item__disp a:hover {
   color: #0071bc;
 }
-.bq__list__item__edit {
-  width: 32px;
-  color: #cccccc;
-  cursor: pointer;
-  margin: 0 4px;
+.bq__list__item__input {
+  margin-right: 8px;
+  border: 2px solid #cccccc;
+  border-radius: 4px;
+  padding: 4px;
 }
 .bq__list__item__delete {
   width: 32px;
   color: #cccccc;
   cursor: pointer;
   margin: 0 4px;
+}
+
+.create_form__title {
+  font-size: 1.4rem;
+  margin: 20px 0;
+}
+.create_form__content {
+  display: flex;
+  gap: 20px;
+  height: 40px;
+}
+.create_form__content__input {
+  width: 320px;
+  border: 2px solid #cccccc;
+  border-radius: 4px;
+  padding: 4px;
+}
+.create_form__content__btn {
+  font-size: 1.2rem;
+  width: 80px;
+  height: 100%;
+  text-align: center;
+  line-height: 2rem;
+  border: 2px solid #cccccc;
+  background-color: #0071bc;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
 }
