@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class StudyRecord extends Model
@@ -26,7 +25,7 @@ class StudyRecord extends Model
 
     public static function sumByLang()
     {
-        $lang_records = StudyRecord::with('studied_langs')->get();
+        $lang_records = self::with('studied_langs')->get();
         $lang_record_arr = [];
         foreach ($lang_records as $lang_record) {
             $hour_per_lang = $lang_record->hour / count($lang_record->studied_langs);
@@ -45,7 +44,7 @@ class StudyRecord extends Model
 
     public static function sumByContent()
     {
-        $content_records = StudyRecord::with('studied_contents')->get();
+        $content_records = self::with('studied_contents')->get();
         $content_record_arr = [];
         foreach ($content_records as $content_record) {
             $hour_per_content = $content_record->hour / count($content_record->studied_contents);
@@ -60,5 +59,30 @@ class StudyRecord extends Model
         }
         ksort($content_record_arr);
         return $content_record_arr;
+    }
+
+    public static function getDailySum()
+    {
+        return self::whereYear('date', date('Y'))
+            ->whereMonth('date', date('m'))
+            ->get()
+            ->groupBy(function ($row) {
+                return $row->date->format('j');
+            })
+            ->map(function ($day) {
+                return $day->sum('hour');
+            });
+    }
+
+    public static function getMonthlySum()
+    {
+        return self::whereYear('date', date('Y'))
+            ->get()
+            ->groupBy(function ($row) {
+                return $row->date->format('n');
+            })
+            ->map(function ($day) {
+                return $day->sum('hour');
+            });
     }
 }
