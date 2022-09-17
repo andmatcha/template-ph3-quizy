@@ -105,12 +105,12 @@
             <div class="main__container__area_hours">
                 <div class="main__container__area_hours__box main__container__area_tile">
                     <p class="main__container__area_hours__box__title">Today</p>
-                    <p class="main__container__area_hours__box__num">{{ $dailySum[date('j')] }}</p>
+                    <p class="main__container__area_hours__box__num">{{ $daily_sum[date('j')] }}</p>
                     <p class="main__container__area_hours__box__unit">hours</p>
                 </div>
                 <div class="main__container__area_hours__box main__container__area_tile">
                     <p class="main__container__area_hours__box__title">Month</p>
-                    <p class="main__container__area_hours__box__num">{{ $monthlySum[date('n')] }}</p>
+                    <p class="main__container__area_hours__box__num">{{ $monthly_sum[date('n')] }}</p>
                     <p class="main__container__area_hours__box__unit">hours</p>
                 </div>
                 <div class="main__container__area_hours__box main__container__area_tile">
@@ -190,18 +190,17 @@
             ['content', 'hours']
         ];
 
-        @foreach ($dailySum as $day => $hour)
+        @foreach ($daily_sum as $day => $hour)
             dailySum.push([{{ $day }}, {{ $hour }}]);
         @endforeach
 
-        @foreach ($langHour as $langId => $hour)
+        @foreach ($lang_hour as $langId => $hour)
             langHour.push(['{{ $langId }}', {{ $hour }}]);
         @endforeach
 
-        @foreach ($contentHour as $contentId => $hour)
+        @foreach ($content_hour as $contentId => $hour)
             contentHour.push(['{{ $contentId }}', {{ $hour }}]);
         @endforeach
-        console.log(dailySum);
     </script>
 
     {{-- google charts読み込み --}}

@@ -19,8 +19,8 @@ class WebappController extends Controller
         $langs = Lang::all();
         $contents = Content::all();
 
-        $defaultDailySum = WebappHelper::getDefaultDailySum();
-        $dailySum = StudyRecord::whereYear('date', date('Y'))
+        $default_daily_sum = WebappHelper::getDefaultDailySum();
+        $daily_sum = StudyRecord::whereYear('date', date('Y'))
             ->whereMonth('date', date('m'))
             ->get()
             ->groupBy(function ($row) {
@@ -29,10 +29,10 @@ class WebappController extends Controller
             ->map(function ($day) {
                 return $day->sum('hour');
             });
-        $dailySum = $defaultDailySum->replace($dailySum);
+        $daily_sum = $default_daily_sum->replace($daily_sum);
 
-        $defaultMonthlySum = WebappHelper::getDefaultMonthlySum();
-        $monthlySum = StudyRecord::whereYear('date', date('Y'))
+        $default_monthly_sum = WebappHelper::getDefaultMonthlySum();
+        $monthly_sum = StudyRecord::whereYear('date', date('Y'))
             ->get()
             ->groupBy(function ($row) {
                 return $row->date->format('n');
@@ -40,12 +40,12 @@ class WebappController extends Controller
             ->map(function ($day) {
                 return $day->sum('hour');
             });
-        $monthlySum = $defaultMonthlySum->replace($monthlySum);
+        $monthly_sum = $default_monthly_sum->replace($monthly_sum);
 
         $total = StudyRecord::all()->sum('hour');
-        $langHour = StudyRecord::sumByLang();
-        $contentHour = StudyRecord::sumByContent();
+        $lang_hour = StudyRecord::sumByLang();
+        $content_hour = StudyRecord::sumByContent();
 
-        return view('webapp.index', compact('langs', 'contents', 'dailySum', 'monthlySum', 'total', 'langHour', 'contentHour'));
+        return view('webapp.index', compact('langs', 'contents', 'daily_sum', 'monthly_sum', 'total', 'lang_hour', 'content_hour'));
     }
 }
