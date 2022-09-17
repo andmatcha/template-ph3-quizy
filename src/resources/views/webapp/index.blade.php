@@ -105,20 +105,12 @@
             <div class="main__container__area_hours">
                 <div class="main__container__area_hours__box main__container__area_tile">
                     <p class="main__container__area_hours__box__title">Today</p>
-                    @if (isset($daily_sum[date('j')]))
-                        <p class="main__container__area_hours__box__num">{{ $dailySum[date('j')] }}</p>
-                    @else
-                        <p class="main__container__area_hours__box__num">0</p>
-                    @endif
+                    <p class="main__container__area_hours__box__num">{{ $dailySum[date('j')] }}</p>
                     <p class="main__container__area_hours__box__unit">hours</p>
                 </div>
                 <div class="main__container__area_hours__box main__container__area_tile">
                     <p class="main__container__area_hours__box__title">Month</p>
-                    @if (isset($monthly_sum[date('n')]))
-                        <p class="main__container__area_hours__box__num">{{ $monthlySum[date('n')] }}</p>
-                    @else
-                        <p class="main__container__area_hours__box__num">0</p>
-                    @endif
+                    <p class="main__container__area_hours__box__num">{{ $monthlySum[date('n')] }}</p>
                     <p class="main__container__area_hours__box__unit">hours</p>
                 </div>
                 <div class="main__container__area_hours__box main__container__area_tile">

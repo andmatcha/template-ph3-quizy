@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\WebappHelper;
 use App\Models\Lang;
 use App\Models\Content;
 use App\Models\StudyRecord;
@@ -18,6 +19,7 @@ class WebappController extends Controller
         $langs = Lang::all();
         $contents = Content::all();
 
+        $defaultDailySum = WebappHelper::getDefaultDailySum();
         $dailySum = StudyRecord::whereYear('date', date('Y'))
             ->whereMonth('date', date('m'))
             ->get()
@@ -27,7 +29,9 @@ class WebappController extends Controller
             ->map(function ($day) {
                 return $day->sum('hour');
             });
+        $dailySum = $defaultDailySum->replace($dailySum);
 
+        $defaultMonthlySum = WebappHelper::getDefaultMonthlySum();
         $monthlySum = StudyRecord::whereYear('date', date('Y'))
             ->get()
             ->groupBy(function ($row) {
@@ -36,6 +40,7 @@ class WebappController extends Controller
             ->map(function ($day) {
                 return $day->sum('hour');
             });
+        $monthlySum = $defaultMonthlySum->replace($monthlySum);
 
         $total = StudyRecord::all()->sum('hour');
         $langHour = StudyRecord::sumByLang();
