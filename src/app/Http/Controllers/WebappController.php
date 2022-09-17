@@ -22,12 +22,8 @@ class WebappController extends Controller
         $contents = Content::all();
         // 当月の日毎の学習時間の合計を取得
         $daily_sum = StudyRecord::getDailySum();
-        $default_daily_sum = WebappHelper::getDefaultDailySum();
-        $daily_sum = $default_daily_sum->replace($daily_sum);
         // 当年の月毎の学習時間の合計を取得（今月の学習時間の表示にのみ使用）
         $monthly_sum = StudyRecord::getMonthlySum();
-        $default_monthly_sum = WebappHelper::getDefaultMonthlySum();
-        $monthly_sum = $default_monthly_sum->replace($monthly_sum);
         // 累計の学習時間を取得
         $total = StudyRecord::all()->sum('hour');
         // 言語別の学習時間を取得

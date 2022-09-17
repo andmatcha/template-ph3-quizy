@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class StudyRecord extends Model
 {
@@ -72,13 +73,33 @@ class StudyRecord extends Model
     }
 
     /**
-     * 月毎の学習時間の合計を取得
+     * デフォルトの日毎の学習時間合計(全ての日について0時間)のコレクションを生成
+     *
+     * @return Illuminate\Support\Collection
+     */
+    private static function getDefaultDailySum()
+    {
+        $default_daily_sum = collect();
+        $now = Carbon::now();
+        $start_of_month = Carbon::now()->startOfMonth();
+        $day = $start_of_month;
+        $month = $day->format('Y-m');
+        while ($month === $now->format('Y-m')) {
+            $default_daily_sum->put($day->day, 0);
+            $day = $day->addDay();
+            $month = $day->format('Y-m');
+        }
+        return $default_daily_sum;
+    }
+
+    /**
+     * 日毎の学習時間の合計を取得
      *
      * @return Illuminate\Support\Collection
      */
     public static function getDailySum()
     {
-        return self::whereYear('date', date('Y'))
+        $daily_sum = self::whereYear('date', date('Y'))
             ->whereMonth('date', date('m'))
             ->get()
             ->groupBy(function ($row) {
@@ -87,6 +108,25 @@ class StudyRecord extends Model
             ->map(function ($day) {
                 return $day->sum('hour');
             });
+        $default_daily_sum = self::getDefaultDailySum();
+        $daily_sum = $default_daily_sum->replace($daily_sum);
+
+        return $daily_sum;
+    }
+
+    /**
+     * デフォルトの月毎の学習時間合計(全ての月について0時間)のコレクションを生成
+     *
+     * @return Illuminate\Support\Collection
+     */
+    private static function getDefaultMonthlySum()
+    {
+        $default_monthly_sum = collect();
+        $months = collect(range(1, 12));
+        foreach ($months as $month) {
+            $default_monthly_sum->put($month, 0);
+        }
+        return $default_monthly_sum;
     }
 
     /**
@@ -96,7 +136,7 @@ class StudyRecord extends Model
      */
     public static function getMonthlySum()
     {
-        return self::whereYear('date', date('Y'))
+        $monthly_sum = self::whereYear('date', date('Y'))
             ->get()
             ->groupBy(function ($row) {
                 return $row->date->format('n');
@@ -104,5 +144,9 @@ class StudyRecord extends Model
             ->map(function ($day) {
                 return $day->sum('hour');
             });
+        $default_monthly_sum = self::getDefaultMonthlySum();
+        $monthly_sum = $default_monthly_sum->replace($monthly_sum);
+
+        return $monthly_sum;
     }
 }
