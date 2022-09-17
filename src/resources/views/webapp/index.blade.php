@@ -162,7 +162,7 @@
                     </path>
                 </svg>
             </button>
-            <p class="footer__container__date">2022年 1月</p>
+            <p class="footer__container__date">{{ date('Y年 n月') }}</p>
             <button class="footer__container__btn">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
@@ -189,25 +189,19 @@
         const contentHour = [
             ['content', 'hours']
         ];
-    </script>
 
-    @foreach ($daily_sum as $day => $hour)
-        <script>
+        @foreach ($daily_sum as $day => $hour)
             dailySum.push([{{ $day }}, {{ $hour }}]);
-        </script>
-    @endforeach
+        @endforeach
 
-    @foreach ($lang_hour as $lang_id => $hour)
-        <script>
+        @foreach ($lang_hour as $lang_id => $hour)
             langHour.push(['{{ $lang_id }}', {{ $hour }}]);
-        </script>
-    @endforeach
+        @endforeach
 
-    @foreach ($content_hour as $content_id => $hour)
-        <script>
+        @foreach ($content_hour as $content_id => $hour)
             contentHour.push(['{{ $content_id }}', {{ $hour }}]);
-        </script>
-    @endforeach
+        @endforeach
+    </script>
 
     {{-- google charts読み込み --}}
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
