@@ -194,12 +194,12 @@
             dailySum.push([{{ $day }}, {{ $hour }}]);
         @endforeach
 
-        @foreach ($lang_hour as $langId => $hour)
-            langHour.push(['{{ $langId }}', {{ $hour }}]);
+        @foreach ($lang_hour as $lang_id => $hour)
+            langHour.push(['{{ $lang_id }}', {{ $hour }}]);
         @endforeach
 
-        @foreach ($content_hour as $contentId => $hour)
-            contentHour.push(['{{ $contentId }}', {{ $hour }}]);
+        @foreach ($content_hour as $content_id => $hour)
+            contentHour.push(['{{ $content_id }}', {{ $hour }}]);
         @endforeach
     </script>
 
