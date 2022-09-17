@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Lang;
 use App\Models\Content;
 use App\Models\StudyRecord;
-use App\Models\StudiedLang;
-use Illuminate\Support\Facades\DB;
 
 class WebappController extends Controller
 {
@@ -21,7 +18,7 @@ class WebappController extends Controller
         $langs = Lang::all();
         $contents = Content::all();
 
-        $daily_sum = StudyRecord::whereYear('date', date('Y'))
+        $dailySum = StudyRecord::whereYear('date', date('Y'))
             ->whereMonth('date', date('m'))
             ->get()
             ->groupBy(function ($row) {
@@ -31,7 +28,7 @@ class WebappController extends Controller
                 return $day->sum('hour');
             });
 
-        $monthly_sum = StudyRecord::whereYear('date', date('Y'))
+        $monthlySum = StudyRecord::whereYear('date', date('Y'))
             ->get()
             ->groupBy(function ($row) {
                 return $row->date->format('n');
@@ -41,18 +38,9 @@ class WebappController extends Controller
             });
 
         $total = StudyRecord::all()->sum('hour');
-        $lang_hour = StudyRecord::sumByLang();
-        $content_hour = StudyRecord::sumByContent();
+        $langHour = StudyRecord::sumByLang();
+        $contentHour = StudyRecord::sumByContent();
 
-        $data = [
-            'langs' => $langs,
-            'contents' => $contents,
-            'daily_sum' => $daily_sum,
-            'monthly_sum' => $monthly_sum,
-            'total' => $total,
-            'lang_hour' => $lang_hour,
-            'content_hour' => $content_hour,
-        ];
-        return view('webapp.index', $data);
+        return view('webapp.index', compact('langs', 'contents', 'dailySum', 'monthlySum', 'total', 'langHour', 'contentHour'));
     }
 }
