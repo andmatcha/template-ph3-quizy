@@ -12,8 +12,6 @@ class QuestionController extends Controller
 {
     public function postUpdate(Request $request)
     {
-        // dd($request->new_questions);
-
         // 既存の設問の選択肢更新
         foreach ($request->choices as $choice_id => $choice) {
             if ($choice != '') {
