@@ -3,11 +3,11 @@ version: "3"
 services:
   db:
     build:
-      context: ./db
+      context: ./docker/db
     ports:
       - 3306:3306
     volumes:
-      - ./db/var/lib/mysql:/var/lib/mysql
+      - ./docker/db/var/lib/mysql:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=laravel
       - MYSQL_USER=laravel
@@ -16,15 +16,15 @@ services:
     platform: linux/x86_64
   app:
     build:
-      context: ./app
+      context: ./docker/app
     volumes:
-      - ../src:/work/backend
+      - ./src:/work/backend
     depends_on: ["db"]
   web:
     build:
-      context: ./web
+      context: ./docker/web
     ports:
       - 80:80
     volumes:
-      - ../src:/work/backend
+      - ./src:/work/backend
     depends_on: ["app"]
