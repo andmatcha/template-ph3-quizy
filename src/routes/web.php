@@ -29,9 +29,9 @@ Route::group(
         Route::post('/admin/quiz/delete', 'Admin\QuizListController@delete')->name('admin.quiz.list.delete');
         // クイズ詳細画面
         Route::get('/admin/quiz/{big_question_id}', 'Admin\QuizDetailController@index')->name('admin.quiz.detail');
-        Route::post('/admin/quiz/detail/update', 'Admin\QuizDetailController@postUpdate')->name('admin.quiz.detail.update');
-        Route::post('/admin/quiz/detail/delete', 'Admin\QuizDetailController@postDelete')->name('admin.quiz.detail.delete');
-        Route::post('/admin/quiz/detail/update_order', 'Admin\QuizDetailController@postUpdateOrder')->name('admin.quiz.detail.order.update');
+        Route::post('/admin/quiz/detail/update', 'Admin\QuizDetailController@update')->name('admin.quiz.detail.update');
+        Route::post('/admin/quiz/detail/delete', 'Admin\QuizDetailController@delete')->name('admin.quiz.detail.delete');
+        Route::post('/admin/quiz/detail/update_order', 'Admin\QuizDetailController@updateOrder')->name('admin.quiz.detail.order.update');
     }
 );
 

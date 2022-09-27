@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
  */
 class QuizDetailController extends Controller
 {
+    // クイズ詳細画面の表示
     public function index($big_question_id)
     {
         $big_question = BigQuestion::find($big_question_id)->load(['questions' => function ($query) {
@@ -28,7 +29,7 @@ class QuizDetailController extends Controller
         return view('admin.quiz.detail', $data);
     }
 
-    public function postUpdate(Request $request)
+    public function update(Request $request)
     {
         // 既存の設問の選択肢更新
         foreach ($request->choices as $choice_id => $choice) {
@@ -119,7 +120,7 @@ class QuizDetailController extends Controller
         return redirect()->route('admin.quiz.detail', ['big_question_id' => $request->bq_id]);
     }
 
-    public function postDelete(Request $request)
+    public function delete(Request $request)
     {
         if (isset($request->question_id)) {
             Question::find($request->question_id)->delete();
@@ -127,7 +128,7 @@ class QuizDetailController extends Controller
         return redirect()->route('admin.quiz.detail', ['big_question_id' => $request->bq_id]);
     }
 
-    public function postUpdateOrder(Request $request)
+    public function updateOrder(Request $request)
     {
         if (isset($request->order)) {
             foreach ($request->order as $question_id => $order) {
