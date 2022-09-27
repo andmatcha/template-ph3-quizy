@@ -24,12 +24,12 @@ Route::group(
         Route::get('/admin/quiz', 'Admin\AdminController@index')->name('admin.quiz.list');
         Route::post('/admin/quiz', 'Admin\AdminController@postIndex');
         Route::get('/admin/quiz/{big_question_id}', 'Admin\AdminController@edit')->name('admin.quiz.detail');
-        Route::post('/admin/bq/update', 'Admin\BigQuestionController@postUpdate')->name('admin.quiz.update');
-        Route::post('/admin/bq/delete', 'Admin\BigQuestionController@postDelete')->name('admin.quiz.delete');
-        Route::post('/admin/bq/create', 'Admin\BigQuestionController@postCreate')->name('admin.quiz.store');
-        Route::post('/admin/q/update', 'Admin\QuestionController@postUpdate')->name('admin.quiz.detail.update');
-        Route::post('/admin/q/delete', 'Admin\QuestionController@postDelete')->name('admin.quiz.detail.delete');
-        Route::post('/admin/q/update_order', 'Admin\QuestionController@postUpdateOrder')->name('admin.quiz.detail.order.update');
+        Route::post('/admin/quiz/update', 'Admin\BigQuestionController@postUpdate')->name('admin.quiz.list.update');
+        Route::post('/admin/quiz/delete', 'Admin\BigQuestionController@postDelete')->name('admin.quiz.list.delete');
+        Route::post('/admin/quiz/create', 'Admin\BigQuestionController@postCreate')->name('admin.quiz.list.store');
+        Route::post('/admin/quiz/detail/update', 'Admin\QuestionController@postUpdate')->name('admin.quiz.detail.update');
+        Route::post('/admin/quiz/detail/delete', 'Admin\QuestionController@postDelete')->name('admin.quiz.detail.delete');
+        Route::post('/admin/quiz/detail/update_order', 'Admin\QuestionController@postUpdateOrder')->name('admin.quiz.detail.order.update');
     }
 );
 
