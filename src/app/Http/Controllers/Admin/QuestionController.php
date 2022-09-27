@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-
-use App\Models\Question;
-
+use App\Http\Controllers\Controller;
 use App\Models\Choice;
+use App\Models\Question;
+use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {

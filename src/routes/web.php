@@ -22,15 +22,15 @@ Route::get('/quiz/{big_question_id}', 'QuizController@quiz');
 Route::group(
     ['middleware' => 'auth'],
     function () {
-        Route::get('/admin', 'AdminController@index');
-        Route::post('/admin', 'AdminController@postIndex');
-        Route::get('/admin/edit/{big_question_id}', 'AdminController@edit');
-        Route::post('/admin/bq/update', 'BigQuestionController@postUpdate');
-        Route::post('/admin/bq/delete', 'BigQuestionController@postDelete');
-        Route::post('/admin/bq/create', 'BigQuestionController@postCreate');
-        Route::post('/admin/q/update', 'QuestionController@postUpdate');
-        Route::post('/admin/q/delete', 'QuestionController@postDelete');
-        Route::post('/admin/q/update_order', 'QuestionController@postUpdateOrder');
+        Route::get('/admin', 'Admin\AdminController@index');
+        Route::post('/admin', 'Admin\AdminController@postIndex');
+        Route::get('/admin/edit/{big_question_id}', 'Admin\AdminController@edit');
+        Route::post('/admin/bq/update', 'Admin\BigQuestionController@postUpdate');
+        Route::post('/admin/bq/delete', 'Admin\BigQuestionController@postDelete');
+        Route::post('/admin/bq/create', 'Admin\BigQuestionController@postCreate');
+        Route::post('/admin/q/update', 'Admin\QuestionController@postUpdate');
+        Route::post('/admin/q/delete', 'Admin\QuestionController@postDelete');
+        Route::post('/admin/q/update_order', 'Admin\QuestionController@postUpdateOrder');
     }
 );
 
