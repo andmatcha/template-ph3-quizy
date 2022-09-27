@@ -14,6 +14,7 @@
 use App\Http\Middleware\HelloMiddleware;
 
 // quizy - クイズ画面
+Route::redirect('/', '/quiz', 301);
 Route::get('/quiz', 'QuizController@index');
 Route::get('/quiz/{big_question_id}', 'QuizController@quiz');
 
