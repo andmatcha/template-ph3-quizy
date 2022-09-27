@@ -97,7 +97,7 @@ class QuestionController extends Controller
                 }
             }
         }
-        return redirect('/admin/edit/' . $request->bq_id);
+        return redirect()->route('admin.quiz.detail', ['big_question_id' => $request->bq_id]);
     }
 
     public function postDelete(Request $request)
@@ -105,7 +105,7 @@ class QuestionController extends Controller
         if (isset($request->question_id)) {
             Question::find($request->question_id)->delete();
         }
-        return redirect('/admin/edit/' . $request->bq_id);
+        return redirect()->route('admin.quiz.detail', ['big_question_id' => $request->bq_id]);
     }
 
     public function postUpdateOrder(Request $request)
@@ -116,6 +116,6 @@ class QuestionController extends Controller
             }
         }
 
-        return redirect('/admin/edit/' . $request->bq_id);
+        return redirect()->route('admin.quiz.detail', ['big_question_id' => $request->bq_id]);
     }
 }

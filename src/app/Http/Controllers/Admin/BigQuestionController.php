@@ -16,7 +16,7 @@ class BigQuestionController extends Controller
             $big_question = BigQuestion::find($bq_id);
             $big_question->fill(['title' => $bq['title'], 'big_question_order' => $bq['order']])->save();
         }
-        return redirect()->action('AdminController@index');
+        return redirect()->route('admin.quiz.list');
     }
 
     public function postDelete(Request $request)
@@ -24,7 +24,7 @@ class BigQuestionController extends Controller
         $bq_id = $request->delete;
         $big_question = BigQuestion::find($bq_id);
         $big_question->delete();
-        return redirect()->action('AdminController@index');
+        return redirect()->route('admin.quiz.list');
     }
 
     public function postCreate(Request $request)
@@ -33,6 +33,6 @@ class BigQuestionController extends Controller
         $order = BigQuestion::max('big_question_order') + 1;
         BigQuestion::create(['title' => $title, 'big_question_order' => $order]);
 
-        return redirect()->action('AdminController@index');
+        return redirect()->route('admin.quiz.list');
     }
 }

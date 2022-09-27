@@ -11,20 +11,19 @@
 |
 */
 
-use App\Http\Middleware\HelloMiddleware;
-
 // quizy - クイズ画面
 Route::redirect('/', '/quiz', 301);
-Route::get('/quiz', 'QuizController@index');
-Route::get('/quiz/{big_question_id}', 'QuizController@quiz');
+Route::get('/quiz', 'QuizController@index')->name('quiz.list');
+Route::get('/quiz/{big_question_id}', 'QuizController@quiz')->name('quiz.detail');
 
 // quizy - 管理画面
 Route::group(
     ['middleware' => 'auth'],
     function () {
-        Route::get('/admin', 'Admin\AdminController@index');
-        Route::post('/admin', 'Admin\AdminController@postIndex');
-        Route::get('/admin/edit/{big_question_id}', 'Admin\AdminController@edit');
+        Route::redirect('/admin', '/admin/quiz', 301);
+        Route::get('/admin/quiz', 'Admin\AdminController@index')->name('admin.quiz.list');
+        Route::post('/admin/quiz', 'Admin\AdminController@postIndex');
+        Route::get('/admin/edit/{big_question_id}', 'Admin\AdminController@edit')->name('admin.quiz.detail');
         Route::post('/admin/bq/update', 'Admin\BigQuestionController@postUpdate');
         Route::post('/admin/bq/delete', 'Admin\BigQuestionController@postDelete');
         Route::post('/admin/bq/create', 'Admin\BigQuestionController@postCreate');
