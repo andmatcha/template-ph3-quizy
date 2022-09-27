@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
  *
  * 設問の追加・更新・削除
  * 選択肢の追加・更新・削除
- * 設問・選択肢ともに順序の変更も可能
+ * 設問の順序の変更も可能
  */
 class QuizDetailController extends Controller
 {
