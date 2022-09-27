@@ -1,7 +1,5 @@
-{{-- ログインチェック --}}
-{{-- 管理画面 --}}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
@@ -21,7 +19,7 @@
     @component('components.admin_header', ['page_title' => '問題一覧'])
     @endcomponent
     <div class="wrapper">
-        <form action="/admin/bq/update" method="POST" id="bq_form">
+        <form action="{{ route('admin.quiz.list.update') }}" method="POST" id="bq_form">
             @csrf
             {{-- 編集・完了ボタン --}}
             <div class="btns">
@@ -46,7 +44,8 @@
                         </div>
                         {{-- 問題タイトル表示 --}}
                         <div class="bq__list__item__disp js_title_disp" id="disp{{ $big_question->id }}">
-                            <a href="/admin/edit/{{ $big_question->id }}">{{ $big_question->title }}</a>
+                            <a
+                                href="{{ route('admin.quiz.detail', ['big_question_id' => $big_question->id]) }}">{{ $big_question->title }}</a>
                         </div>
                         {{-- 問題タイトル編集用input --}}
                         <input type="text" name="bq[{{ $big_question->id }}][title]"
@@ -67,12 +66,12 @@
             </ul>
         </form>
 
-        <form action="/admin/bq/delete" method="POST" id="delete_form">
+        <form action="{{ route('admin.quiz.list.delete') }}" method="POST" id="delete_form">
             @csrf
             <input type="hidden" id="delete_input" name="delete" value="">
         </form>
 
-        <form action="/admin/bq/create" method="POST" id="create_form">
+        <form action="{{ route('admin.quiz.list.store') }}" method="POST" id="create_form">
             @csrf
             <h3 class="create_form__title">新規作成</h3>
             <div class="create_form__content">

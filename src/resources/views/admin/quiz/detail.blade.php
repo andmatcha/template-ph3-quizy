@@ -23,7 +23,7 @@
             <div class="big_question__btn" onclick="sortBtn()" id="sort_btn">並び替え</div>
             <div class="big_question__btn big_question__btn--done hide" onclick="sendSortForm()" id="sort_done_btn">完了</div>
         </div>
-        <form action="/admin/q/update" method="POST" enctype="multipart/form-data" id="edit_form">
+        <form action="{{ route('admin.quiz.detail.update') }}" method="POST" enctype="multipart/form-data" id="edit_form">
             @csrf
             <input type="hidden" name="bq_id" value="{{ $bq->id }}">
 
@@ -103,14 +103,14 @@
                 <div class="send__btn" onclick="sendForm()">更新する</div>
             </div>
         </form>
-        <form action="/admin/q/delete" method="POST" id="delete_form">
+        <form action="{{ route('admin.quiz.detail.delete') }}" method="POST" id="delete_form">
             @csrf
             <input type="hidden" name="bq_id" value="{{ $bq->id }}">
             <input type="hidden" name="question_id" id="delete_input">
         </form>
 
         {{-- 並び替え画面 --}}
-        <form action="/admin/q/update_order" method="POST" class="hide" id="sort_form">
+        <form action="{{ route('admin.quiz.detail.order.update') }}" method="POST" class="hide" id="sort_form">
             @csrf
             <input type="hidden" name="bq_id" value="{{ $bq->id }}">
             <div class="sort" id="sort_list">

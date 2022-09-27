@@ -11,30 +11,31 @@
 |
 */
 
-use App\Http\Middleware\HelloMiddleware;
+/* ユーザー画面 */
+Route::redirect('/', '/quiz', 301);
+Route::get('/quiz', 'QuizController@list')->name('quiz.list');
+Route::get('/quiz/{big_question_id}', 'QuizController@detail')->name('quiz.detail');
 
-// quizy - クイズ画面
-Route::get('/quiz', 'QuizController@index');
-Route::get('/quiz/{big_question_id}', 'QuizController@quiz');
+/* 管理者画面 */
+Route::group(
+    ['middleware' => 'auth'],
+    function () {
+        Route::redirect('/admin', '/admin/quiz', 301);
+        // クイズ一覧画面
+        Route::get('/admin/quiz', 'Admin\QuizListController@index')->name('admin.quiz.list');
+        Route::post('/admin/quiz', 'Admin\QuizListController@postIndex');
+        Route::post('/admin/quiz/store', 'Admin\QuizListController@store')->name('admin.quiz.list.store');
+        Route::post('/admin/quiz/update', 'Admin\QuizListController@update')->name('admin.quiz.list.update');
+        Route::post('/admin/quiz/delete', 'Admin\QuizListController@delete')->name('admin.quiz.list.delete');
+        // クイズ詳細画面
+        Route::get('/admin/quiz/{big_question_id}', 'Admin\QuizDetailController@index')->name('admin.quiz.detail');
+        Route::post('/admin/quiz/detail/update', 'Admin\QuizDetailController@update')->name('admin.quiz.detail.update');
+        Route::post('/admin/quiz/detail/delete', 'Admin\QuizDetailController@delete')->name('admin.quiz.detail.delete');
+        Route::post('/admin/quiz/detail/update_order', 'Admin\QuizDetailController@updateOrder')->name('admin.quiz.detail.order.update');
+    }
+);
 
-// quizy - 管理画面
-Route::get('/admin', 'AdminController@index');
-Route::post('/admin', 'AdminController@postIndex');
-// Route::get('/admin/login', 'LoginController@getLogin');
-// Route::post('/admin/login', 'LoginController@postLogin');
-// Route::get('/admin/logout', 'LoginController@getLogout');
-Route::get('/admin/edit/{big_question_id}', 'AdminController@edit');
-Route::post('/admin/bq/update', 'BigQuestionController@postUpdate');
-Route::post('/admin/bq/delete', 'BigQuestionController@postDelete');
-Route::post('/admin/bq/create', 'BigQuestionController@postCreate');
-Route::post('/admin/q/update', 'QuestionController@postUpdate');
-Route::post('/admin/q/delete', 'QuestionController@postDelete');
-Route::post('/admin/q/update_order', 'QuestionController@postUpdateOrder');
-
-Route::get('/admin/login', 'Auth\LoginController@showLoginForm')->name('login');
+// 認証
+Route::get('/admin/login', 'Auth\LoginController@showLoginForm')->name('admin.login');
 Route::post('/admin/login', 'Auth\LoginController@login');
 Route::get('/admin/logout', 'Auth\LoginController@logout')->name('logout');
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');

@@ -1,19 +1,36 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Models\BigQuestion;
+use App\Models\Question;
+use App\Models\Choice;
 use Illuminate\Http\Request;
 
-use App\Models\Question;
-
-use App\Models\Choice;
-
-class QuestionController extends Controller
+/**
+ * 管理者画面 - クイズ詳細
+ *
+ * 設問の追加・更新・削除
+ * 選択肢の追加・更新・削除
+ * 設問の順序の変更も可能
+ */
+class QuizDetailController extends Controller
 {
-    public function postUpdate(Request $request)
+    // クイズ詳細画面の表示
+    public function index($big_question_id)
     {
-        // dd($request->new_questions);
+        $big_question = BigQuestion::find($big_question_id)->load(['questions' => function ($query) {
+            $query->orderby('question_order', 'asc');
+        }]);
+        $data = [
+            'bq' => $big_question
+        ];
+        return view('admin.quiz.detail', $data);
+    }
 
+    public function update(Request $request)
+    {
         // 既存の設問の選択肢更新
         foreach ($request->choices as $choice_id => $choice) {
             if ($choice != '') {
@@ -100,18 +117,18 @@ class QuestionController extends Controller
                 }
             }
         }
-        return redirect('/admin/edit/' . $request->bq_id);
+        return redirect()->route('admin.quiz.detail', ['big_question_id' => $request->bq_id]);
     }
 
-    public function postDelete(Request $request)
+    public function delete(Request $request)
     {
         if (isset($request->question_id)) {
             Question::find($request->question_id)->delete();
         }
-        return redirect('/admin/edit/' . $request->bq_id);
+        return redirect()->route('admin.quiz.detail', ['big_question_id' => $request->bq_id]);
     }
 
-    public function postUpdateOrder(Request $request)
+    public function updateOrder(Request $request)
     {
         if (isset($request->order)) {
             foreach ($request->order as $question_id => $order) {
@@ -119,6 +136,6 @@ class QuestionController extends Controller
             }
         }
 
-        return redirect('/admin/edit/' . $request->bq_id);
+        return redirect()->route('admin.quiz.detail', ['big_question_id' => $request->bq_id]);
     }
 }
