@@ -3,12 +3,31 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Choice;
+use App\Models\BigQuestion;
 use App\Models\Question;
+use App\Models\Choice;
 use Illuminate\Http\Request;
 
-class QuestionController extends Controller
+/**
+ * 管理者画面 - クイズ詳細
+ *
+ * 設問の追加・更新・削除
+ * 選択肢の追加・更新・削除
+ * 設問・選択肢ともに順序の変更も可能
+ */
+class QuizDetailController extends Controller
 {
+    public function index($big_question_id)
+    {
+        $big_question = BigQuestion::find($big_question_id)->load(['questions' => function ($query) {
+            $query->orderby('question_order', 'asc');
+        }]);
+        $data = [
+            'bq' => $big_question
+        ];
+        return view('admin.quiz.detail', $data);
+    }
+
     public function postUpdate(Request $request)
     {
         // 既存の設問の選択肢更新

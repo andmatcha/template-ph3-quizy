@@ -103,14 +103,14 @@
                 <div class="send__btn" onclick="sendForm()">更新する</div>
             </div>
         </form>
-        <form action="/admin/q/delete" method="POST" id="delete_form">
+        <form action="{{ route('admin.quiz.detail.delete') }}" method="POST" id="delete_form">
             @csrf
             <input type="hidden" name="bq_id" value="{{ $bq->id }}">
             <input type="hidden" name="question_id" id="delete_input">
         </form>
 
         {{-- 並び替え画面 --}}
-        <form action="/admin/q/update_order" method="POST" class="hide" id="sort_form">
+        <form action="{{ route('admin.quiz.detail.order.update') }}" method="POST" class="hide" id="sort_form">
             @csrf
             <input type="hidden" name="bq_id" value="{{ $bq->id }}">
             <div class="sort" id="sort_list">

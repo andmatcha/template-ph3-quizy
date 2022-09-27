@@ -17,7 +17,7 @@ class QuizListController extends Controller
     public function index()
     {
         $big_questions = BigQuestion::orderby('big_question_order', 'asc')->get();
-        return view('admin.index', ['big_questions' => $big_questions]);
+        return view('admin.quiz.list', ['big_questions' => $big_questions]);
     }
 
     // 大問追加
