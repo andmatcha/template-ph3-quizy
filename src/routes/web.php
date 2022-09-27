@@ -13,8 +13,8 @@
 
 /* ユーザー画面 */
 Route::redirect('/', '/quiz', 301);
-Route::get('/quiz', 'QuizController@index')->name('quiz.list');
-Route::get('/quiz/{big_question_id}', 'QuizController@quiz')->name('quiz.detail');
+Route::get('/quiz', 'QuizController@list')->name('quiz.list');
+Route::get('/quiz/{big_question_id}', 'QuizController@detail')->name('quiz.detail');
 
 /* 管理者画面 */
 Route::group(
