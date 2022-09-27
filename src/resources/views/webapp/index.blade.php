@@ -30,16 +30,7 @@
                         <p class="modal__container__contents__area__box__title">学習コンテンツ(複数選択可)</p>
                         <div class="modal__container__contents__area__box__checkboxes">
                             @foreach ($contents as $content)
-                                <label>
-                                    <div class="modal__container__contents__area__box__checkboxes__icon">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </div>
-                                    <input type="checkbox">{{ $content->name }}
-                                </label>
+                                @include('components.checkbox', ['title' => $content->name])
                             @endforeach
                         </div>
                     </div>
@@ -47,16 +38,7 @@
                         <p class="modal__container__contents__area__box__title">学習言語(複数選択可)</p>
                         <div class="modal__container__contents__area__box__checkboxes">
                             @foreach ($langs as $lang)
-                                <label>
-                                    <div class="modal__container__contents__area__box__checkboxes__icon">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </div>
-                                    <input type="checkbox">{{ $lang->name }}
-                                </label>
+                                @include('components.checkbox', ['title' => $lang->name])
                             @endforeach
                         </div>
                     </div>
@@ -103,21 +85,9 @@
     <div class="main">
         <div class="main__container main__container_v">
             <div class="main__container__area_hours">
-                <div class="main__container__area_hours__box main__container__area_tile">
-                    <p class="main__container__area_hours__box__title">Today</p>
-                    <p class="main__container__area_hours__box__num">{{ $daily_sum[date('j')] }}</p>
-                    <p class="main__container__area_hours__box__unit">hours</p>
-                </div>
-                <div class="main__container__area_hours__box main__container__area_tile">
-                    <p class="main__container__area_hours__box__title">Month</p>
-                    <p class="main__container__area_hours__box__num">{{ $monthly_sum[date('n')] }}</p>
-                    <p class="main__container__area_hours__box__unit">hours</p>
-                </div>
-                <div class="main__container__area_hours__box main__container__area_tile">
-                    <p class="main__container__area_hours__box__title">Total</p>
-                    <p class="main__container__area_hours__box__num">{{ $total }}</p>
-                    <p class="main__container__area_hours__box__unit">hours</p>
-                </div>
+                @include('components.hour_tile', ['title' => 'Today', 'amount' => $daily_sum[date('j')]])
+                @include('components.hour_tile', ['title' => 'Month', 'amount' => $monthly_sum[date('n')]])
+                @include('components.hour_tile', ['title' => 'Month', 'amount' => $total])
             </div>
             <div class="main__container__area_bar_chart main__container__area_tile" id="barChart"></div>
         </div>
@@ -129,10 +99,7 @@
                 </div>
                 <ul>
                     @foreach ($langs as $lang)
-                        <li>
-                            <div class="main__container__area_donut_chart__list_circle"></div>
-                            {{ $lang->name }}
-                        </li>
+                        @include('components.legend_item', ['title' => $lang->name])
                     @endforeach
                 </ul>
             </div>
@@ -143,10 +110,7 @@
                 </div>
                 <ul>
                     @foreach ($contents as $content)
-                        <li>
-                            <div class="main__container__area_donut_chart__list_circle"></div>
-                            {{ $content->name }}
-                        </li>
+                        @include('components.legend_item', ['title' => $content->name])
                     @endforeach
                 </ul>
             </div>
@@ -156,18 +120,11 @@
     <footer class="footer">
         <div class="footer__container">
             <button class="footer__container__btn">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
-                    </path>
-                </svg>
+                <img src="{{ asset('images/icons/prev_button.svg') }}" alt="">
             </button>
             <p class="footer__container__date">{{ date('Y年 n月') }}</p>
             <button class="footer__container__btn">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
+                <img src="{{ asset('images/icons/next_button.svg') }}" alt="">
             </button>
         </div>
     </footer>

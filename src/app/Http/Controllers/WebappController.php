@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Lang;
 use App\Models\Content;
 use App\Models\StudyRecord;
-use App\Models\StudiedLang;
-use Illuminate\Support\Facades\DB;
 
 class WebappController extends Controller
 {
@@ -18,41 +15,21 @@ class WebappController extends Controller
 
     public function index()
     {
+        // 言語名を取得
         $langs = Lang::all();
+        // コンテンツ名を取得
         $contents = Content::all();
-
-        $daily_sum = StudyRecord::whereYear('date', date('Y'))
-            ->whereMonth('date', date('m'))
-            ->get()
-            ->groupBy(function ($row) {
-                return $row->date->format('j');
-            })
-            ->map(function ($day) {
-                return $day->sum('hour');
-            });
-
-        $monthly_sum = StudyRecord::whereYear('date', date('Y'))
-            ->get()
-            ->groupBy(function ($row) {
-                return $row->date->format('n');
-            })
-            ->map(function ($day) {
-                return $day->sum('hour');
-            });
-
+        // 当月の日毎の学習時間の合計を取得
+        $daily_sum = StudyRecord::getDailySum();
+        // 当年の月毎の学習時間の合計を取得（今月の学習時間の表示にのみ使用）
+        $monthly_sum = StudyRecord::getMonthlySum();
+        // 累計の学習時間を取得
         $total = StudyRecord::all()->sum('hour');
+        // 言語別の学習時間を取得
         $lang_hour = StudyRecord::sumByLang();
+        // コンテンツ別の学習時間を取得
         $content_hour = StudyRecord::sumByContent();
 
-        $data = [
-            'langs' => $langs,
-            'contents' => $contents,
-            'daily_sum' => $daily_sum,
-            'monthly_sum' => $monthly_sum,
-            'total' => $total,
-            'lang_hour' => $lang_hour,
-            'content_hour' => $content_hour,
-        ];
-        return view('webapp.index', $data);
+        return view('webapp.index', compact('langs', 'contents', 'daily_sum', 'monthly_sum', 'total', 'lang_hour', 'content_hour'));
     }
 }
